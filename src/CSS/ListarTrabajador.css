@@ -1,0 +1,85 @@
+body {
+    background-color: #E3EDF9 !important;
+    
+  }
+  
+  .navbar {
+    width: 100%;
+  }
+  
+  .Icon {
+    margin-left: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+.Log-Out {
+    width: 70px !important;
+    height: 80px !important;
+    margin-right: 20px;
+}
+
+  
+  .parrafoSalir {
+    color: rgb(0, 0, 0);
+    border-radius: 1px;
+    border-color: black;
+    border: 5px;
+    text-align: center;
+  }
+  
+  .content-box {
+    box-sizing: content-box;
+    background-color: rgb(255, 255, 255);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+   
+    
+  }
+  
+  .Titulo {
+    text-align: center !important;
+    padding-top: 15px;
+  }
+  
+  .Rol-Usuario {
+    text-align: right !important;
+  }
+  
+  .left-column {
+    padding: 0px;
+    border-top: 1px !important;
+    padding-top: 10px;
+  }
+  
+  .right-column {
+    border-top: 1px !important;
+    padding-top: 10px;
+  }
+  
+  .h2Titulo {
+    padding-bottom: 5px;
+    padding-top: 3px;
+  }
+  
+
+  .BotonesFiltrar {
+    display: flex;
+    justify-content: center;
+  
+  
+  }
+  
+.BotonFiltrar{
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+.BotonesFuncionarios {
+    display: flex;
+    justify-content: flex-end;   
+
+}
