@@ -1,7 +1,7 @@
+import './css/Users.css'
+import { Link } from 'react-router-dom';
 
-import './CSS/InformacionPersonal.css'
-
-function InformacionPersonal() {
+function UsersPage() {
 
 
 
@@ -41,56 +41,40 @@ function InformacionPersonal() {
   <div className="content-box">
     <div className="row">
       <div className="col-md-6">
-        <h3>Bienvenid@ </h3>
+        <h2 className='tituloUsers'>Bienvenid@ </h2>
         <div className="button">
-          <button
-            type="button"
-            className="btn btn-primary btn-lg btn-block botonUsuario"
-            onclick="location.href='personal_info.html'"
-          >
-            <img
-              src="../Icons/usericons/user-alt-1-svgrepo-com.svg"
-              alt="userIcon"
-              className="userIcon"
-            />
-            Ver informacion personal
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary btn-lg btn-block botonUsuario"
-            onclick="location.href='list_funcionario.html'"
-          >
-            <img
-              src="../Icons/usericons/clipboard-list-svgrepo-com.svg"
-              alt="userIcon"
-              className="listIcon"
-            />
-            Ver Lista funcionario
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary btn-lg btn-block botonUsuario"
-            onclick="location.href='manage_funcionario.html'"
-          >
-            <img
-              src="../Icons/usericons/search-alt-2-svgrepo-com.svg"
-              alt="userIcon"
-              className="searchIcon"
-            />
-            Gestionar funcionario
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary btn-lg btn-block botonUsuario"
-            onclick="location.href='add_funcionario.html'">
-                
-            <img
-              src="../Icons/usericons/adduser.svg"
-              alt="userIcon"
-              className="addUser"
-            />
-            Ingresar funcionario
-          </button>
+        <Link to="/informacion_personal" className="btn btn-primary btn-lg btn-block botonUsuario">
+          <img
+            src="/Icons/Iconos-botones/user-alt-1-svgrepo-com.svg"
+            alt="userIcon"
+            className="userIcon me-2"
+          />
+          Ver información personal
+        </Link>
+        <Link to="/listar_trabajador" className="btn btn-primary btn-lg btn-block botonUsuario">
+          <img
+            src="/Icons/Iconos-botones/clipboard-list-svgrepo-com.svg"
+            alt="ListIcon"
+            className="userIcon me-2"
+          />
+          Ver lista de funcionario
+        </Link>
+        <Link to="/gestionar_funcionario" className="btn btn-primary btn-lg btn-block botonUsuario">
+          <img
+            src="/Icons/Iconos-botones/search-alt-2-svgrepo-com.svg"
+            alt="GestionarIcon"
+            className="userIcon me-2"
+          />
+          Gestionar funcionario
+        </Link>
+        <Link to="/ingresar_trabajador" className="btn btn-primary btn-lg btn-block botonUsuario">
+          <img
+            src="/Icons/Iconos-botones/adduser.svg"
+            alt="GestionarIcon"
+            className="userIcon me-2"
+          />
+          Ingresar funcionario
+        </Link>
         </div>
       </div>
       <div className="col-md-6 ">
@@ -153,4 +137,4 @@ function InformacionPersonal() {
     );
 }
 
-export default InformacionPersonal;
+export default UsersPage;

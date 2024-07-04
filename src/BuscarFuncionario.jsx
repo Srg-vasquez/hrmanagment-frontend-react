@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import './CSS/BuscarFuncionario.css'
+import './css/BuscarFuncionario.css'
+import { Link } from 'react-router-dom';
 
 function BuscarFuncionario() {
     return (
@@ -89,7 +90,9 @@ function BuscarFuncionario() {
                         <div className="Botones d-flex justify-content-end mt-4">
                             <button type="button" className="btn btn-primary btn-lg custom-btn">Limpiar</button>
                             <button type="button" className="btn btn-success btn-lg custom-btn">Buscar</button>
-                            <button type="button" className="btn btn-primary btn-lg custom-btn">Volver</button>
+                            <Link to="/users" className="btn btn-info btn-lg btn-volver">
+                                Volver
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -1,51 +1,14 @@
-import { useState } from 'react';
-import './CSS/ListarTrabajador.css'
+import { Link } from 'react-router-dom';
+import './css/ListarTrabajador.css'
 
 function ListarTrabajador() {
 
-  
-    // var requestOptions = {
-    //   method: 'GET',
-    //   redirect: 'follow'
-    // };
- 
-  
-    
-    // fetch("localhost:3000/api/v1/users", requestOptions)
-    
-    //   .then((response) => response.json())
-    //   //recorremos json
-    //   .then((json) => json.forEach(tabla_elementos)
-    //   )
-    //   .then(result => console.log(result))
-    //   //mostramos error por consola
-    //   .catch(error => console.log('error', error));
 
-    //   function tabla_elementos(element, index, arr){
-    //     //agregamos html a nuestra vista
-    //   arr[index] = document.querySelector('#tbl_clientes tbody').innerHTML +=
-    //   `<tr>
-    //       <td>${element.id_cliente}</td>
-    //       <td>${element.rut}</td>
-    //       <td>${element.nombres}</td>
-    //       <td>${element.apellidos}</td>
-    //       <td>${element.email}</td>
-    //       <td>${element.celular}</td>
-    
-    //       <td><button type="button" class="btn btn-warning" ><a href=actualizar_cliente.html?id=${element.id_cliente}>Actualizar</button>
-    
-    
-    //       <button type="button" class="btn btn-danger"><a href=eliminar_cliente.html?id=${element.id_cliente}Eliminar</button></td>
-          
-      
-          
-    //   </tr>`
-      
-    // };
 
+  
     return (
         <>
-        {/* header pagina */}
+       
         <nav
           className="navbar navbar-light"
           style={{ backgroundColor: "#8FC1E3" }}
@@ -200,13 +163,9 @@ function ListarTrabajador() {
             <button type="button" className="btn btn-primary btn-lg">
               Exportar
             </button>
-            <button
-              type="button"
-              className="btn btn-primary btn-lg"
-              style={{ marginLeft: 20 }}
-            >
-              Volver
-            </button>
+            <Link to="/users" className="btn btn-info btn-lg btn-volver">
+                  Volver
+                </Link>
           </div>
         </div>
       </>

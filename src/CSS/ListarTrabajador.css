@@ -83,3 +83,12 @@ body {
     justify-content: flex-end;   
 
 }
+
+h3{
+  font-size: 24px !important;
+}
+
+
+.btn-volver{
+  margin-left: 20px;
+}
