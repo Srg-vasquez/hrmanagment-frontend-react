@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import './CSS/camposUsuario.css'
+import './css/camposUsuario.css'
+import { Link } from 'react-router-dom';
 
 function IngresarTrabajador() {
     return (<>
@@ -307,9 +308,9 @@ function IngresarTrabajador() {
                       <button type="button" className="btn btn-success btn-lg">
                         Crear Registro
                       </button>
-                      <button type="button" className="btn btn-info btn-lg">
+                      <Link to="/users" className="btn btn-info btn-lg btn-volver">
                         Volver
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

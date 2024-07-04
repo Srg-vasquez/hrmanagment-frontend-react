@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import './CSS/InformacionPersonal.css'
+import './css/InformacionPersonal.css'
+import { Link } from 'react-router-dom';
 
 function InformacionPersonal() {
 
@@ -318,9 +319,9 @@ const nombre = 'sergio'
                 <button type="button" className="btn btn-success btn-lg sucess">
                   Guardar
                 </button>
-                <button type="button" className="btn btn-info btn-lg">
+                <Link to="/users" className="btn btn-info btn-lg btn-volver">
                   Volver
-                </button>
+                </Link>
               </div>
             </div>
           </div>
