@@ -103,9 +103,9 @@ function UsersPage() {
             style={{ width: "90%", textAlign: "center" }}
           />
           <br />
-          <h3>
+          <h4>
             <b>Nombre Persona</b>
-          </h3>
+          </h4>
           <p className="title">Cargo Trabajador</p>
           <p>Departamento</p>
           <div style={{ margin: "24px 0" }}>

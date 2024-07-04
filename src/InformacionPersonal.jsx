@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom';
 
 function InformacionPersonal() {
 
-const nombre = 'sergio'
 
 
 
     return (
         <>
-        <>
-  {/* header pagina */}
+
   <nav
     className="navbar navbar-light"
     style={{ backgroundColor: "#8FC1E3" }}
@@ -238,7 +236,7 @@ const nombre = 'sergio'
             <div className="col">
               <div data-mdb-input-init="" className="form-outline">
                 <input
-                  placeholder={+569}
+                  placeholder={'+569'}
                   type="text"
                   id="form6Example1"
                   className="form-control"
@@ -331,7 +329,7 @@ const nombre = 'sergio'
   </div>
 </>
 
-        </>
+       
     );
 }
 

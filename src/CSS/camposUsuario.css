@@ -79,7 +79,7 @@ padding-right: 20px;
 }
 
 .Botones{
-    text-align: right; /* Alineación de los botones a la derecha */
+    text-align: right; 
     margin-top: 20px; 
     
     
@@ -87,11 +87,11 @@ padding-right: 20px;
 
 
 .Botones button {
-    margin-left: 11px; /* Espacio entre los botones */
+    margin-left: 11px;
 }
 
 h3{
-    font-size: 24px !important;
+    font-size: 32px !important;
 }
 
 .btn-volver{
