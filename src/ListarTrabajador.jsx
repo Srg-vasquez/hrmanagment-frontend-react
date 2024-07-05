@@ -119,55 +119,50 @@ function ListarTrabajador() {
           </div>
         </div>
         <div className="content-box">
-          <div className="Tabla">
-            <table className="table table-striped table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Nombres</th>
-                  <th scope="col">Apellidos</th>
-                  <th scope="col">Rut</th>
-                  <th scope="col">Dirección</th>
-                  <th scope="col">Teléfono</th>
-                  <th scope="col">Cargo</th>
-                  <th scope="col">Fecha de ingreso</th>
-                  <th scope="col">Departamento</th>
+        <div className="Tabla">
+          <table className="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apellido Paterno</th>
+                <th scope="col">Apellido Materno</th>
+                <th scope="col">RUT</th>
+                <th scope="col">DV</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Área</th>
+                <th scope="col">Fecha de ingreso</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.user_id}>
+                  <td>{user.trabajador.nombres}</td>
+                  <td>{user.trabajador.apellido_paterno}</td>
+                  <td>{user.trabajador.apellido_materno}</td>
+                  <td>{user.trabajador.rut}</td>
+                  <td>{user.trabajador.dv}</td>
+                  <td>{user.trabajador.direccion}</td>
+                  <td>{user.trabajador.telefono}</td>
+                  <td>{user.trabajador.datosLaborales.cargo.descripcion}</td>
+                  <td>{user.trabajador.datosLaborales.area.descripcion}</td>
+                  <td>{new Date(user.trabajador.datosLaborales.fecha_ingreso).toLocaleDateString()}</td>
                 </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>Mark</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td colSpan={2}>Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          {/* botones */}
-          <div className="BotonesFuncionarios">
-            <button type="button" className="btn btn-primary btn-lg">
-              Exportar
-            </button>
-            <Link to="/users" className="btn btn-info btn-lg btn-volver">
-                  Volver
-                </Link>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
+        {/* botones */}
+        <div className="BotonesFuncionarios">
+          <button type="button" className="btn btn-primary btn-lg">
+            Exportar
+          </button>
+          <Link to="/users" className="btn btn-info btn-lg btn-volver">
+            Volver
+          </Link>
+        </div>
+      </div>
       </>
       
     );
