@@ -1,16 +1,15 @@
 import { useState } from 'react';
-import './CSS/InformacionPersonal.css'
+import './css/InformacionPersonal.css'
+import { Link } from 'react-router-dom';
 
 function InformacionPersonal() {
 
-const nombre = 'sergio'
 
 
 
     return (
         <>
-        <>
-  {/* header pagina */}
+
   <nav
     className="navbar navbar-light"
     style={{ backgroundColor: "#8FC1E3" }}
@@ -237,7 +236,7 @@ const nombre = 'sergio'
             <div className="col">
               <div data-mdb-input-init="" className="form-outline">
                 <input
-                  placeholder={+569}
+                  placeholder={'+569'}
                   type="text"
                   id="form6Example1"
                   className="form-control"
@@ -318,9 +317,9 @@ const nombre = 'sergio'
                 <button type="button" className="btn btn-success btn-lg sucess">
                   Guardar
                 </button>
-                <button type="button" className="btn btn-info btn-lg">
+                <Link to="/users" className="btn btn-info btn-lg btn-volver">
                   Volver
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -330,7 +329,7 @@ const nombre = 'sergio'
   </div>
 </>
 
-        </>
+       
     );
 }
 
