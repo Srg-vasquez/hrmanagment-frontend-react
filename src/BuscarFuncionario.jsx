@@ -1,8 +1,27 @@
 import { useState } from 'react';
 import './css/BuscarFuncionario.css'
 import { Link } from 'react-router-dom';
+import axios from '../axiosConfig';
 
 function BuscarFuncionario() {
+    
+    const [rut, setRut] = useState('');
+    const [funcionario, setFuncionario] = useState(null);
+    const [error, setError] = useState('');
+  
+    const handleSearch = () => {
+      axios.get(`/usuarios/${rut}`)
+        .then(response => {
+          setFuncionario(response.data);
+          setError('');
+        })
+        .catch(error => {
+          console.error("Hubo un error al buscar el funcionario!", error);
+          setError('Funcionario no encontrado');
+          setFuncionario(null);
+    });
+};
+
     return (
         <>
        
@@ -38,6 +57,8 @@ function BuscarFuncionario() {
                                                     type="text"
                                                     id="form6Example3"
                                                     className="form-control"
+                                                    value={rut}
+                                                    onChange={(e) => setRut(e.target.value)}
                                                 />
                                                 
                                                 
@@ -63,36 +84,36 @@ function BuscarFuncionario() {
                                         <th scope="col">Rut</th>
                                         <th scope="col">Cargo</th>
                                         <th scope="col">Departamento</th>
+                                        <th scope="col">Editar</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                             <tbody>
+                                                {funcionario ? (
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                    <td>{funcionario.trabajador.nombres}</td>
+                                    <td>{funcionario.trabajador.apellido_paterno} {funcionario.trabajador.apellido_materno}</td>
+                                    <td>{funcionario.trabajador.rut}-{funcionario.trabajador.dv}</td>
+                                    <td>{funcionario.trabajador.datosLaborales?.cargo?.descripcion || 'N/A'}</td>
+                                    <td>{funcionario.trabajador.datosLaborales?.area?.descripcion || 'N/A'}</td>
+                                    <td><Link to="/gestionar_funcionario" className="btn btn-warning botonUsuario">
+                                                
+                                                </Link>
+                                    </td>
                                     </tr>
+                                ) : (
                                     <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
+                                    <td colSpan="6">{error || 'Ingrese un RUT y presione Buscar'}</td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
+                                )}
+                             </tbody>
                             </table>
                         </div>
                         <div className="Botones d-flex justify-content-end mt-4">
-                            <button type="button" className="btn btn-primary btn-lg custom-btn">Limpiar</button>
-                            <button type="button" className="btn btn-success btn-lg custom-btn">Buscar</button>
-                            <Link to="/users" className="btn btn-info btn-lg btn-volver">
-                                Volver
-                            </Link>
+                                <button type="button" className="btn btn-primary btn-lg custom-btn" onClick={() => { setRut(''); setFuncionario(null); setError(''); }}>Limpiar</button>
+                                <button type="button" className="btn btn-success btn-lg custom-btn" onClick={handleSearch}>Buscar</button>
+                                <Link to="/users" className="btn btn-primary btn-lg  custom-btn">
+                                    Volver
+                                </Link>
                         </div>
                     </div>
                 </div>

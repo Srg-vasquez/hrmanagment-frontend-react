@@ -89,6 +89,9 @@ h3{
 }
 
 
-.btn-volver{
+.custom-btn {
+  width: 200px;
+  height: 45px;
+  color: white;
   margin-left: 20px;
 }

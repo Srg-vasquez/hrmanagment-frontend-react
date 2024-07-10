@@ -1,8 +1,10 @@
-import { useState } from 'react';
+
 import './css/camposUsuario.css'
 import { Link } from 'react-router-dom';
 
 function IngresarTrabajador() {
+
+
     return (<>
         
         <nav
@@ -46,7 +48,7 @@ function IngresarTrabajador() {
                         htmlFor="form6Example1"
                         placeholder="Nombre Trabajador..."
                       >
-                        Nombre Trabajador
+                        Nombre 
                       </label>
                     </div>
                   </div>
@@ -78,7 +80,7 @@ function IngresarTrabajador() {
                         htmlFor="form6Example1"
                         placeholder="Nombre Trabajador..."
                       >
-                        Rut Trabajador
+                        Rut 
                       </label>
                     </div>
                   </div>
@@ -120,26 +122,33 @@ function IngresarTrabajador() {
                       className="form-select"
                       aria-label="Default select example"
                     >
-                      <option selected="">Selecciona el Sexo</option>
+                      <option selected="">Elija una opción...</option>
                       <option value={1}>Masculino</option>
                       <option value={2}>Femenino</option>
                     </select>
+                    Sexo
                   </div>
                 </div>
                 <div className="row mb-4">
-                  <div className="col">
-                    <div data-mdb-input-init="" className="form-outline">
-                      <input
-                        placeholder="Ingrese Cargo... "
-                        type="text"
-                        id="form6Example1"
-                        className="form-control"
-                      />
-                      <label className="form-label" htmlFor="form6Example1">
-                        Cargo Trabajador
-                      </label>
-                    </div>
+                <div className="col">
+                  <div data-mdb-input-init="" className="form-outline">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    
+                  >
+                    <option selected="">Elija una opción...</option>
+                    <option value={1}>Administrativo</option>
+                    <option value={2}>Jefe de recursos humanos</option>
+                    <option value={3}>Analista programador</option>
+                    <option value={4}>Soporte TI</option>
+                    <option value={5}>Encargado de Ventas</option>
+                    <option value={6}>Encargado de Logística</option>
+                    
+                  </select >
+                  Cargo del trabajador
                   </div>
+                </div>
                   <div className="col">
                     <div data-mdb-input-init="" className="form-outline">
                       <input
@@ -153,6 +162,28 @@ function IngresarTrabajador() {
                     </div>
                   </div>
                 </div>
+                <div className='row mb-4'>
+          <div className="col">
+              <div data-mdb-input-init="" className="form-outline inputCargo">
+              <select
+                className="form-select"
+                aria-label="Default select example"
+               
+              >
+                <option selected="">Elija una opción...</option>
+                <option value={1}>Recursos Humanos</option>
+                <option value={2}>Soporte TI</option>
+                <option value={3}>Finanzas</option>
+                <option value={4}>Jurídicas</option>
+                <option value={5}>Ventas</option>
+                <option value={6}>Logística</option>
+              
+                
+              </select >
+              Área
+              </div>
+            </div>
+          </div>
                 <div className="row mb-4">
                   <div className="col">
                     <div data-mdb-input-init="" className="form-outline">
@@ -219,7 +250,7 @@ function IngresarTrabajador() {
                         className="form-control"
                       />
                       <label className="form-label" htmlFor="form6Example2">
-                        relación
+                        Relación
                       </label>
                     </div>
                   </div>
@@ -259,7 +290,7 @@ function IngresarTrabajador() {
                           htmlFor="form6Example1"
                           placeholder="Nombre Trabajador..."
                         >
-                          Nombre Trabajador
+                          Nombre
                         </label>
                       </div>
                     </div>
@@ -298,24 +329,27 @@ function IngresarTrabajador() {
                           className="form-select"
                           aria-label="Default select example"
                         >
-                          <option selected="">Selecciona el Sexo</option>
+                          <option selected="">Elija una opción...</option>
                           <option value={1}>Masculino</option>
                           <option value={2}>Femenino</option>
                         </select>
+                        Sexo
                       </div>
                     </div>
-                    <div className="Botones">
-                      <button type="button" className="btn btn-success btn-lg">
-                        Crear Registro
-                      </button>
-                      <Link to="/users" className="btn btn-info btn-lg btn-volver">
-                        Volver
-                      </Link>
-                    </div>
+                    
                   </div>
                 </div>
               </form>
+              <div className="Botones">
+                      <button type="button" className="btn btn-success btn-lg custom-btn">
+                        Crear Registro
+                      </button>
+                      <Link to="/users" className="btn btn-primary btn-lg  custom-btn">
+                        Volver
+                      </Link>
+                    </div>
             </div>
+            
           </div>
         </div>
       </>

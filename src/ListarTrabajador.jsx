@@ -1,11 +1,22 @@
 import { Link } from 'react-router-dom';
-import './css/ListarTrabajador.css'
+import './css/ListarTrabajador.css';
+import React, { useEffect, useState } from 'react';
+import axios from '../axiosConfig/';
 
 function ListarTrabajador() {
 
+  const [trabajadores, setTrabajadores] = useState([]);
 
+  useEffect(() => {
+    axios.get('/usuarios')
+      .then(response => {
+        setTrabajadores(response.data);
+      })
+      .catch(error => {
+        console.error("Hubo un error al obtener los trabajadores!", error);
+      });
+    }, []);
 
-  
     return (
         <>
        
@@ -129,41 +140,32 @@ function ListarTrabajador() {
                   <th scope="col">Dirección</th>
                   <th scope="col">Teléfono</th>
                   <th scope="col">Cargo</th>
-                  <th scope="col">Fecha de ingreso</th>
                   <th scope="col">Departamento</th>
+                  <th scope="col">Fecha de ingreso</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>Mark</td>
+                 {trabajadores.map(trabajador => (
+                <tr key={trabajador.user_id}>
+                  <td>{trabajador.trabajador.nombres}</td>
+                  <td>{trabajador.trabajador.apellido_paterno} {trabajador.trabajador.apellido_materno}</td>
+                  <td>{trabajador.trabajador.rut}-{trabajador.trabajador.dv}</td>
+                  <td>{trabajador.trabajador.direccion}</td>
+                  <td>{trabajador.trabajador.telefono}</td>
+                  <td>{trabajador.trabajador.datosLaborales?.cargo?.descripcion || 'N/A'}</td>
+                  <td>{trabajador.trabajador.datosLaborales?.area?.descripcion || 'N/A'}</td>
+                  <td>{trabajador.trabajador.datosLaborales?.fecha_ingreso || 'N/A'}</td>
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td colSpan={2}>Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
+              ))}
               </tbody>
             </table>
           </div>
           {/* botones */}
           <div className="BotonesFuncionarios">
-            <button type="button" className="btn btn-primary btn-lg">
+            <button type="button" className="btn btn-primary btn-lg custom-btn">
               Exportar
             </button>
-            <Link to="/users" className="btn btn-info btn-lg btn-volver">
+            <Link to="/users" className="btn btn-primary btn-lg  custom-btn">
                   Volver
                 </Link>
           </div>
