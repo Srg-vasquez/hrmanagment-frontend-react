@@ -305,13 +305,13 @@ function GesionarFuncionario() {
                 </div>
               </div>
               <div className="Botones">
-                <button type="button" className="btn btn-danger btn-lg">
+                <button type="button" className="btn btn-danger btn-lg custom-btn">
                   Eliminar Registro
                 </button>
-                <button type="button" className="btn btn-success btn-lg">
+                <button type="button" className="btn btn-success btn-lg custom-btn ">
                   Guardar
                 </button>
-                <Link to="/users" className="btn btn-info btn-lg btn-volver">
+                <Link to="/users" className="btn btn-primary btn-lg  custom-btn">
                   Volver
                 </Link>
               </div>

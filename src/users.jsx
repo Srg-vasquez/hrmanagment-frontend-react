@@ -29,13 +29,13 @@ function UsersPage() {
     <img src="/Icons/envelope-svgrepo-com.svg" alt="Icon" className="Icon" />
     <div className="Rol-Usuario">@USUARIO</div>
     <div className="logOut">
-      <a href="/Icons/sign-out-svgrepo-com.svg">
-        <img
-          src="/Icons/sign-out-svgrepo-com.svg"
-          alt="Log out"
-          className="Log-Out"
-        />
-      </a>
+         <Link to="/">
+           <img
+              src="/Icons/sign-out-svgrepo-com.svg"
+              alt="Log out"
+              className="Log-Out"
+           />
+       </Link>
     </div>
   </nav>
   <div className="content-box">
@@ -61,7 +61,7 @@ function UsersPage() {
         </Link>
         <Link to="/gestionar_funcionario" className="btn btn-primary btn-lg btn-block botonUsuario">
           <img
-            src="/Icons/Iconos-botones/search-alt-2-svgrepo-com.svg"
+            src="/Icons/Iconos-botones/users-edit-svgrepo-com.svg"
             alt="GestionarIcon"
             className="userIcon me-2"
           />
@@ -74,6 +74,14 @@ function UsersPage() {
             className="userIcon me-2"
           />
           Ingresar funcionario
+        </Link>
+        <Link to="/buscar_funcionario" className="btn btn-primary btn-lg btn-block botonUsuario">
+          <img
+            src="/Icons/Iconos-botones/search-alt-2-svgrepo-com.svg"
+            alt="GestionarIcon"
+            className="userIcon me-2"
+          />
+          Buscar funcionario
         </Link>
         </div>
       </div>
@@ -109,18 +117,7 @@ function UsersPage() {
           <p className="title">Cargo Trabajador</p>
           <p>Departamento</p>
           <div style={{ margin: "24px 0" }}>
-            <a href="https://www.linkedin.com/in/md-abu-talha/" target="_blank">
-              <i className="fa fa-linkedin" />
-            </a>
-            <a href="https://www.facebook.com/talha.sust.cse" target="_blank">
-              <i className="fa fa-facebook" />
-            </a>
-            <a href="https://github.com/talha08" target="_blank">
-              <i className="fa fa-github" />
-            </a>
-            <a href="https://medium.com/@talhaqc" target="_blank">
-              <i className="fa fa-medium" />
-            </a>
+           
           </div>
           <p>
             <a href="talha08.github.io" className="buttonProfile">
