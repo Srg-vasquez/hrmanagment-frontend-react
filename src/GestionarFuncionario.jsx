@@ -311,7 +311,7 @@ function GesionarFuncionario() {
                 <button type="button" className="btn btn-success btn-lg custom-btn ">
                   Guardar
                 </button>
-                <Link to="/users" className="btn btn-primary btn-lg  custom-btn">
+                <Link to="/buscar_funcionario" className="btn btn-primary btn-lg  custom-btn">
                   Volver
                 </Link>
               </div>

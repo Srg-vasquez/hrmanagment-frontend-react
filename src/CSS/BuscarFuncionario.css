@@ -91,3 +91,10 @@ h3{
     color: white;
     margin-left: 20px;
 }
+
+
+.botonWrng{
+
+    border-color: rgb(59, 59, 59);
+    border-radius: 9px;
+}

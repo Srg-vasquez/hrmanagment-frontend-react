@@ -95,8 +95,8 @@ function BuscarFuncionario() {
                                     <td>{funcionario.trabajador.rut}-{funcionario.trabajador.dv}</td>
                                     <td>{funcionario.trabajador.datosLaborales?.cargo?.descripcion || 'N/A'}</td>
                                     <td>{funcionario.trabajador.datosLaborales?.area?.descripcion || 'N/A'}</td>
-                                    <td><Link to="/gestionar_funcionario" className="btn btn-warning botonUsuario">
-                                                
+                                    <td><Link to="/gestionar_funcionario" className="btn btn-warning botonWrng">
+                                                Editar
                                                 </Link>
                                     </td>
                                     </tr>
