@@ -59,14 +59,7 @@ function UsersPage() {
           />
           Ver lista de funcionario
         </Link>
-        <Link to="/gestionar_funcionario" className="btn btn-primary btn-lg btn-block botonUsuario">
-          <img
-            src="/Icons/Iconos-botones/users-edit-svgrepo-com.svg"
-            alt="GestionarIcon"
-            className="userIcon me-2"
-          />
-          Gestionar funcionario
-        </Link>
+        
         <Link to="/ingresar_trabajador" className="btn btn-primary btn-lg btn-block botonUsuario">
           <img
             src="/Icons/Iconos-botones/adduser.svg"
