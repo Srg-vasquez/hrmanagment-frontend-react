@@ -103,23 +103,23 @@ function InformacionPersonal() {
             </div>
           </div>
           <div className="row mb-4">
-            <div className="col">
-              <div data-mdb-input-init="" className="form-outline">
-                <input
-                  placeholder="Ingrese direccion..."
-                  type="text"
-                  id="form6Example1"
-                  className="form-control"
-                />
-                <label
-                  className="form-label"
-                  htmlFor="form6Example1"
-                  placeholder="Nombre Trabajador..."
-                >
-                  Direccion
-                </label>
+              <div className="col">
+                <div data-mdb-input-init="" className="form-outline">
+                  <input
+                    placeholder="Ingrese direccion..."
+                    type="text"
+                    id="form6Example1"
+                    className="form-control"
+                  />
+                  <label
+                    className="form-label"
+                    htmlFor="form6Example1"
+                    placeholder="Nombre Trabajador..."
+                  >
+                    Direccion
+                  </label>
+                </div>
               </div>
-            </div>
             <div className="col">
               {/* espacio select  */}
               <select
@@ -129,24 +129,29 @@ function InformacionPersonal() {
                 <option selected="">Selecciona el Sexo</option>
                 <option value={1}>Masculino</option>
                 <option value={2}>Femenino</option>
+                <option value={3}>otro</option>
               </select>
             </div>
           </div>
           <div className="row mb-4">
             <div className="col">
               <div data-mdb-input-init="" className="form-outline">
-                <input
-                  placeholder="Ingrese Cargo... "
-                  type="text"
-                  id="form6Example1"
-                  className="form-control"
-                  disabled
-                />
-                <label className="form-label" htmlFor="form6Example1">
-                  Cargo Trabajador
-                </label>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                disabled
+              >
+                <option selected="">Cargo trabajador</option>
+                <option value={1}>Masculino</option>
+                <option value={2}>Femenino</option>
+                <option value={3}>otro</option>
+                
+              </select >
+              Cargo del trabajador
               </div>
             </div>
+
+            
             <div className="col">
               <div data-mdb-input-init="" className="form-outline">
                 <input
@@ -158,6 +163,30 @@ function InformacionPersonal() {
                 <label className="form-label" htmlFor="form6Example2">
                   Fecha ingreso compañia
                 </label>
+              </div>
+              
+            </div>
+            
+          </div>
+          <div className='row mb-4'>
+          <div className="col">
+              <div data-mdb-input-init="" className="form-outline inputCargo">
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                disabled
+              >
+                <option selected="">Área trabajador</option>
+                <option value={1}>Recursos Humanos</option>
+                <option value={2}>Soporte TI</option>
+                <option value={3}>Finanzas</option>
+                <option value={4}>Jurídicas</option>
+                <option value={5}>Ventas</option>
+                <option value={6}>Logística</option>
+              
+                
+              </select >
+              Área del trabajador
               </div>
             </div>
           </div>
@@ -190,6 +219,7 @@ function InformacionPersonal() {
                 <label className="form-label" htmlFor="form6Example2" />
               </div>
             </div>
+            
           </div>
         </form>
       </div>
@@ -309,21 +339,23 @@ function InformacionPersonal() {
                     <option selected="">Selecciona el Sexo</option>
                     <option value={1}>Masculino</option>
                     <option value={2}>Femenino</option>
+                    <option value={3}>otro</option>
                   </select>
                 </div>
               </div>
-              <div className="Botones">
-                {/* <button type="button" class="btn btn-danger btn-lg">Eliminar Registro</button> */}
-                <button type="button" className="btn btn-success btn-lg sucess">
-                  Guardar
-                </button>
-                <Link to="/users" className="btn btn-info btn-lg btn-volver">
-                  Volver
-                </Link>
-              </div>
+             
             </div>
           </div>
         </form>
+        <div className="Botones">
+                
+                <button type="button" className="btn btn-success btn-lg sucess custom-btn ">
+                  Guardar
+                </button>
+                <Link to="/users" className="btn btn-primary btn-lg  custom-btn">
+                  Volver
+                </Link>
+              </div>
       </div>
     </div>
   </div>
