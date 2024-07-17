@@ -102,3 +102,10 @@ h3{
 }
 
 
+.Iconcheck {
+    width: 300px !important;
+    height: 300px !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

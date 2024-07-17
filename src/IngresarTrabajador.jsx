@@ -30,6 +30,7 @@ function IngresarTrabajador() {
   });
 
   const [message, setMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -83,6 +84,7 @@ function IngresarTrabajador() {
       const response = await axios.post('/usuarios', payload);
       console.log("Respuesta del servidor:", response);
       setMessage('Trabajador ingresado correctamente!');
+      setShowModal(true); // Mostrar el modal de éxito
       setFormData({
         nombres: '',
         apellido_paterno: '',
@@ -538,6 +540,26 @@ function IngresarTrabajador() {
           </div>
         </form>
         {message && <p>{message}</p>}
+
+        {/* Modal de éxito */}
+        <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }} tabIndex="-1">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Éxito</h5>
+                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+              </div>
+              <div className="modal-body">
+                <p>Usuario creado exitosamente!</p>
+                <img src="/Icons/Iconos-botones/checklist.svg" alt="Éxito" className="img-fluid Iconcheck " />
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" onClick={() => setShowModal(false)}>Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {showModal && <div className="modal-backdrop fade show"></div>}
       </div>
     </>
   );
