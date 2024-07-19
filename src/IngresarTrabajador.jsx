@@ -550,7 +550,7 @@ function IngresarTrabajador() {
                 <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
               </div>
               <div className="modal-body">
-                <p>Usuario creado exitosamente!</p>
+                <p className='parrafocheck'>Usuario creado exitosamente!</p>
                 <img src="/Icons/Iconos-botones/checklist.svg" alt="Éxito" className="img-fluid Iconcheck " />
               </div>
               <div className="modal-footer">
