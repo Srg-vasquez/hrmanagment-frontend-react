@@ -103,9 +103,14 @@ h3{
 
 
 .Iconcheck {
-    width: 300px !important;
-    height: 300px !important;
+    width: 200px !important;
+    height: 200px !important;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+
+.parrafocheck{
+    text-align: center;
 }
