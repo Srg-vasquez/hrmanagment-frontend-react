@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from '../axiosConfig';
 import { useLocation, Link } from 'react-router-dom';
 import './css/camposUsuario.css';
+import Modal from './modal.jsx';
 
 function GestionarFuncionario() {
   const location = useLocation();
@@ -31,6 +32,9 @@ function GestionarFuncionario() {
     id_relacion_carga: '',
     id_area: '',
   });
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState('');
 
   const sexos = [
     { id: 1, descripcion: 'Masculino' },
@@ -77,19 +81,19 @@ function GestionarFuncionario() {
         dv: funcionario.trabajador.dv || '',
         direccion: funcionario.trabajador.direccion || '',
         telefono: funcionario.trabajador.telefono ? funcionario.trabajador.telefono.toString() : '',
-        id_sexo: funcionario.trabajador.id_sexo ? funcionario.trabajador.id_sexo.toString() : '',
-        id_cargo: funcionario.trabajador.datosLaborales?.id_cargo ? funcionario.trabajador.datosLaborales.id_cargo.toString() : '',
+        id_sexo: funcionario.trabajador.id_sexo ? funcionario.trabajador.id_sexo : '',
+        id_cargo: funcionario.trabajador.datosLaborales?.id_cargo ? funcionario.trabajador.datosLaborales.id_cargo : '',
         fecha_ingreso: funcionario.trabajador.datosLaborales?.fecha_ingreso ? new Date(funcionario.trabajador.datosLaborales.fecha_ingreso).toISOString().split('T')[0] : '',
         nombre_contacto: funcionario.trabajador.contactoEmergencia?.nombre_completo || '',
-        id_relacion_contacto: funcionario.trabajador.contactoEmergencia?.id_relacion ? funcionario.trabajador.contactoEmergencia.id_relacion.toString() : '',
+        id_relacion_contacto: funcionario.trabajador.contactoEmergencia?.id_relacion ? funcionario.trabajador.contactoEmergencia.id_relacion : '',
         telefono_contacto: funcionario.trabajador.contactoEmergencia?.telefono ? funcionario.trabajador.contactoEmergencia.telefono.toString() : '',
         nombre_carga: funcionario.trabajador.cargaFamiliar?.nombre_completo.split(' ')[0] || '',
         apellido_carga: funcionario.trabajador.cargaFamiliar?.nombre_completo.split(' ')[1] || '',
         rut_carga: funcionario.trabajador.cargaFamiliar?.rut ? funcionario.trabajador.cargaFamiliar.rut.toString() : '',
         dv_carga: funcionario.trabajador.cargaFamiliar?.dv || '',
-        id_sexo_carga: funcionario.trabajador.cargaFamiliar?.id_sexo ? funcionario.trabajador.cargaFamiliar.id_sexo.toString() : '',
-        id_relacion_carga: funcionario.trabajador.cargaFamiliar?.id_relacion ? funcionario.trabajador.cargaFamiliar.id_relacion.toString() : '',
-        id_area: funcionario.trabajador.datosLaborales?.id_area ? funcionario.trabajador.datosLaborales.id_area.toString() : '',
+        id_sexo_carga: funcionario.trabajador.cargaFamiliar?.id_sexo ? funcionario.trabajador.cargaFamiliar.id_sexo : '',
+        id_relacion_carga: funcionario.trabajador.cargaFamiliar?.id_relacion ? funcionario.trabajador.cargaFamiliar.id_relacion : '',
+        id_area: funcionario.trabajador.datosLaborales?.id_area ? funcionario.trabajador.datosLaborales.id_area : '',
         contrasena: '',
         confirmar_contrasena: '',
       });
@@ -111,7 +115,7 @@ function GestionarFuncionario() {
     const payload = {
       username: formData.rut.toString(),
       password: formData.contrasena,
-      id_perfil: 1, 
+      id_perfil: 1,
       trabajador: {
         nombres: formData.nombres,
         apellido_paterno: formData.apellido_paterno,
@@ -141,12 +145,72 @@ function GestionarFuncionario() {
       },
     };
 
-    console.log('Payload a enviar:', payload);
+    setModalType('update');
+    setShowModal(true);
+  };
+
+  const handleDelete = () => {
+    setModalType('delete');
+    setShowModal(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(`/usuarios/${formData.rut}`);
+      setShowModal(false);
+      alert('Funcionario eliminado correctamente!');
+    } catch (error) {
+      console.error('Hubo un error al eliminar el trabajador!', error.response?.data || error);
+      alert('Hubo un error al eliminar el trabajador!');
+    }
+  };
+
+  const handleModalConfirm = () => {
+    if (modalType === 'delete') {
+      confirmDelete();
+    } else {
+      updateFuncionario();
+    }
+  };
+
+  const updateFuncionario = async () => {
+    const payload = {
+      username: formData.rut.toString(),
+      password: formData.contrasena,
+      id_perfil: 1,
+      trabajador: {
+        nombres: formData.nombres,
+        apellido_paterno: formData.apellido_paterno,
+        apellido_materno: formData.apellido_materno,
+        rut: parseInt(formData.rut, 10),
+        dv: formData.dv,
+        id_sexo: parseInt(formData.id_sexo, 10),
+        direccion: formData.direccion,
+        telefono: parseInt(formData.telefono, 10),
+        datosLaborales: {
+          id_cargo: parseInt(formData.id_cargo, 10),
+          fecha_ingreso: formData.fecha_ingreso,
+          id_area: parseInt(formData.id_area, 10),
+        },
+        contactoEmergencia: {
+          nombre_completo: formData.nombre_contacto,
+          id_relacion: parseInt(formData.id_relacion_contacto, 10),
+          telefono: parseInt(formData.telefono_contacto, 10),
+        },
+        cargaFamiliar: {
+          nombre_completo: `${formData.nombre_carga} ${formData.apellido_carga}`,
+          rut: parseInt(formData.rut_carga, 10),
+          dv: formData.dv_carga,
+          id_sexo: parseInt(formData.id_sexo_carga, 10),
+          id_relacion: parseInt(formData.id_relacion_carga, 10),
+        },
+      },
+    };
 
     try {
-      const response = await axios.put(`/usuarios/${formData.rut}`, payload);
-      console.log('Respuesta del servidor:', response);
-      alert('Trabajador actualizado correctamente!');
+      await axios.put(`/usuarios/${formData.rut}`, payload);
+      setShowModal(false);
+      alert('Funcionario actualizado con éxito!');
     } catch (error) {
       console.error('Hubo un error al actualizar el trabajador!', error.response?.data || error);
       alert('Hubo un error al actualizar el trabajador!');
@@ -229,7 +293,6 @@ function GestionarFuncionario() {
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Elija una opción...</option>
                     {sexos.map((sexo) => (
                       <option key={sexo.id} value={sexo.id}>{sexo.descripcion}</option>
                     ))}
@@ -314,7 +377,6 @@ function GestionarFuncionario() {
                       onChange={handleChange}
                       required 
                     >
-                      <option value="">Elija una opción...</option>
                       {cargos.map((cargo) => (
                         <option key={cargo.id} value={cargo.id}>{cargo.descripcion}</option>
                       ))}
@@ -349,7 +411,6 @@ function GestionarFuncionario() {
                       onChange={handleChange}
                       required 
                     >
-                      <option value="">Elija una opción...</option>
                       {areas.map((area) => (
                         <option key={area.id} value={area.id}>{area.descripcion}</option>
                       ))}
@@ -389,7 +450,6 @@ function GestionarFuncionario() {
                       onChange={handleChange}
                       required
                     >
-                      <option value="">Elija una opción...</option>
                       {relaciones.map((relacion) => (
                         <option key={relacion.id} value={relacion.id}>{relacion.descripcion}</option>
                       ))}
@@ -493,7 +553,6 @@ function GestionarFuncionario() {
                       onChange={handleChange}
                       required
                     >
-                      <option value="">Elija una opción...</option>
                       {relaciones.map((relacion) => (
                         <option key={relacion.id} value={relacion.id}>{relacion.descripcion}</option>
                       ))}
@@ -510,7 +569,6 @@ function GestionarFuncionario() {
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Elija una opción...</option>
                     {sexos.map((sexo) => (
                       <option key={sexo.id} value={sexo.id}>{sexo.descripcion}</option>
                     ))}
@@ -522,10 +580,18 @@ function GestionarFuncionario() {
           </div>
           <div className="Botones">
             <button type="submit" className="btn btn-success btn-lg custom-btn">Actualizar Registro</button>
+            <button type="button" className="btn btn-danger btn-lg custom-btn" onClick={handleDelete}>Eliminar Funcionario</button>
             <Link to="/users" className="btn btn-primary btn-lg custom-btn">Volver</Link>
           </div>
         </form>
       </div>
+      <Modal
+        show={showModal}
+        title={modalType === 'update' ? '¿Desea actualizar este funcionario?' : '¿Seguro deseas eliminar este funcionario?'}
+        message=""
+        onConfirm={handleModalConfirm}
+        onCancel={() => setShowModal(false)}
+      />
     </div>
   );
 }
