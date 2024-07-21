@@ -10,11 +10,14 @@ import ListarTrabajador from './ListarTrabajador.jsx';
 import LogIn from './Log-In.jsx';
 import UsersPage from './users.jsx';
 
+import LoginDataViewer from './buscadorderrores.jsx';
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
       <Routes>
         <Route path="/" element={<LogIn />} />
+        <Route path="/login-data-viewer" element={<LoginDataViewer />} />
         <Route path="/buscar_funcionario" element={<BuscarFuncionario />} />
         <Route path="/gestionar_funcionario" element={<GestionarFuncionario />} />
         <Route path="/informacion_personal" element={<InformacionPersonal />} />
