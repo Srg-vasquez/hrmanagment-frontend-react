@@ -1,32 +1,23 @@
-import { useState } from 'react';
+// src/Log-In.jsx
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../axiosConfig'; 
+import { AuthContext } from './contexts/AuthContext'; // Importa el contexto de autenticación
 import './css/Login.css';
 
 function LogIn() {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // Obtén la función de login del contexto
   const [rut, setRut] = useState('');
   const [password, setPassword] = useState('');
 
   // Función para manejar el inicio de sesión y la redirección
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('/auth/login', {
-        username: rut,
-        password: password,
-      });
+    const success = await login(rut, password);
 
-      const user = response.data.user;
-
-      if (user) {
-        localStorage.setItem('user', JSON.stringify(user));
-        navigate('/users');
-      } else {
-        alert('La contraseña es incorrecta. Inténtelo de nuevo.');
-      }
-    } catch (error) {
-      console.error('Error al iniciar sesión:', error);
+    if (success) {
+      navigate('/users');
+    } else {
       alert('Error al iniciar sesión. Inténtelo de nuevo.');
     }
   };
@@ -37,7 +28,7 @@ function LogIn() {
         <div className="login-container">
           <div className="login-image"></div>
           <div className="login wrap">
-          <img src="/Icons/user-circle-svgrepo-com (5).svg" alt="Icon" className="IconLogin" />
+            <img src="/Icons/user-circle-svgrepo-com (5).svg" alt="Icon" className="IconLogin" />
             <form onSubmit={handleLogin}>
               <input
                 placeholder="Ingrese su cuenta"
