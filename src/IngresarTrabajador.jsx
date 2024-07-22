@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from '../axiosConfig';
 import './css/camposUsuario.css';
-import { Link } from 'react-router-dom';
+import { Link,  } from 'react-router-dom';
 
 function IngresarTrabajador() {
+  
   const [formData, setFormData] = useState({
     nombres: '',
     apellido_paterno: '',
@@ -27,12 +28,16 @@ function IngresarTrabajador() {
     id_sexo_carga: '',
     id_relacion_carga: '',
     id_area: '',
+    id_perfil: '',
   });
 
   const [message, setMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if ((name === 'rut' || name === 'telefono') && value.length > 8) return;
+    if ((name === 'rut' || name === 'telefono') && !/^\d*$/.test(value)) return;
     setFormData({ ...formData, [name]: value });
   };
 
@@ -46,7 +51,7 @@ function IngresarTrabajador() {
     const payload = {
       username: formData.rut.toString(),
       password: formData.contrasena,
-      id_perfil: 1,
+      id_perfil: parseInt(formData.id_perfil, 10),
       trabajador: {
         nombres: formData.nombres,
         apellido_paterno: formData.apellido_paterno,
@@ -76,37 +81,11 @@ function IngresarTrabajador() {
       },
     };
 
-    console.log("Datos del formulario:", formData);
-    console.log("Payload a enviar:", JSON.stringify(payload, null, 2));
-
     try {
       const response = await axios.post('/usuarios', payload);
       console.log("Respuesta del servidor:", response);
       setMessage('Trabajador ingresado correctamente!');
-      setFormData({
-        nombres: '',
-        apellido_paterno: '',
-        apellido_materno: '',
-        rut: '',
-        dv: '',
-        direccion: '',
-        telefono: '',
-        id_sexo: '',
-        id_cargo: '',
-        fecha_ingreso: '',
-        contrasena: '',
-        confirmar_contrasena: '',
-        nombre_contacto: '',
-        id_relacion_contacto: '',
-        telefono_contacto: '',
-        nombre_carga: '',
-        apellido_carga: '',
-        rut_carga: '',
-        dv_carga: '',
-        id_sexo_carga: '',
-        id_relacion_carga: '',
-        id_area: '',
-      });
+      setShowModal(true);
     } catch (error) {
       console.error("Hubo un error al ingresar el trabajador!", error.response.data || error);
       if (error.response && error.response.data && Array.isArray(error.response.data.errors)) {
@@ -115,6 +94,11 @@ function IngresarTrabajador() {
         setMessage('Hubo un error al ingresar el trabajador!');
       }
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+   
   };
 
   return (
@@ -213,6 +197,7 @@ function IngresarTrabajador() {
                       value={formData.rut}
                       onChange={handleChange}
                       required
+                      maxLength={8}
                     />
                     <label className="form-label" htmlFor="rut">Rut Trabajador</label>
                   </div>
@@ -260,6 +245,7 @@ function IngresarTrabajador() {
                       value={formData.telefono}
                       onChange={handleChange}
                       required
+                      maxLength={8}
                     />
                     <label className="form-label" htmlFor="telefono">Telefono</label>
                   </div>
@@ -325,6 +311,25 @@ function IngresarTrabajador() {
                       <option value={6}>Logística</option>
                     </select>
                     Área
+                  </div>
+                </div>
+                <div className="col">
+                  <div data-mdb-input-init="" className="form-outline">
+                    <select
+                      type="text"
+                      id="id_perfil"
+                      name="id_perfil"
+                      className="form-select"
+                      value={formData.id_perfil}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Elija una opción...</option>
+                      <option value={1}>Administrador</option>
+                      <option value={2}>Visualizador</option>
+                      <option value={3}>Usuario</option>
+                    </select>
+                    Perfil
                   </div>
                 </div>
               </div>
@@ -416,6 +421,7 @@ function IngresarTrabajador() {
                       value={formData.telefono_contacto}
                       onChange={handleChange}
                       required
+                      maxLength={8}
                     />
                     <label className="form-label" htmlFor="telefono_contacto">Telefono de emergencia</label>
                   </div>
@@ -468,6 +474,7 @@ function IngresarTrabajador() {
                       value={formData.rut_carga}
                       onChange={handleChange}
                       required
+                      maxLength={8}
                     />
                     <label className="form-label" htmlFor="rut_carga">RUT</label>
                   </div>
@@ -538,6 +545,28 @@ function IngresarTrabajador() {
           </div>
         </form>
         {message && <p>{message}</p>}
+
+        {/* Modal de éxito */}
+        <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }} tabIndex="-1">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Éxito</h5>
+                <button type="button" className="btn-close" onClick={handleCloseModal}></button>
+              </div>
+              <div className="modal-body">
+                <p className='parrafocheck'>Usuario creado exitosamente!</p>
+                <img src="/Icons/Iconos-botones/checklist.svg" alt="Éxito" className="img-fluid Iconcheck " />
+              </div>
+              <div className="modal-footer">
+              <Link to="/users" className="btn btn-primary btn-lg custom-btn">
+              Volver
+            </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        {showModal && <div className="modal-backdrop fade show"></div>}
       </div>
     </>
   );

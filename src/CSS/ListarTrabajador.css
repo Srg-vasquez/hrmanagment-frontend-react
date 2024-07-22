@@ -1,97 +1,108 @@
 body {
-    background-color: #E3EDF9 !important;
-    
-  }
-  
-  .navbar {
-    width: 100%;
-  }
-  
-  .Icon {
-    margin-left: 20px;
-    width: 100px;
-    height: 100px;
+  background-color: #E3EDF9 !important;
+}
+
+.navbar {
+  width: 100%;
+}
+
+.Icon {
+  margin-left: 20px;
+  width: 100px;
+  height: 100px;
 }
 
 .Log-Out {
-    width: 70px !important;
-    height: 80px !important;
-    margin-right: 20px;
+  width: 70px !important;
+  height: 80px !important;
+  margin-right: 20px;
 }
 
-  
-  .parrafoSalir {
-    color: rgb(0, 0, 0);
-    border-radius: 1px;
-    border-color: black;
-    border: 5px;
-    text-align: center;
-  }
-  
-  .content-box {
-    box-sizing: content-box;
-    background-color: rgb(255, 255, 255);
-    margin: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-   
-    
-  }
-  
-  .Titulo {
-    text-align: center !important;
-    padding-top: 15px;
-  }
-  
-  .Rol-Usuario {
-    text-align: right !important;
-  }
-  
-  .left-column {
-    padding: 0px;
-    border-top: 1px !important;
-    padding-top: 10px;
-  }
-  
-  .right-column {
-    border-top: 1px !important;
-    padding-top: 10px;
-  }
-  
-  .h2Titulo {
-    padding-bottom: 5px;
-    padding-top: 3px;
-  }
-  
+.parrafoSalir {
+  color: rgb(0, 0, 0);
+  border-radius: 1px;
+  border-color: black;
+  border: 5px;
+  text-align: center;
+}
 
-  .BotonesFiltrar {
-    display: flex;
-    justify-content: center;
-  
-  
-  }
-  
-.BotonFiltrar{
-    text-align: center;
-    padding-top: 10px;
+.content-box {
+  box-sizing: content-box;
+  background-color: rgb(255, 255, 255);
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.Titulo {
+  text-align: center !important;
+  padding-top: 15px;
+}
+
+.Rol-Usuario {
+  text-align: right !important;
+}
+
+.left-column {
+  padding: 0px;
+  border-top: 1px !important;
+  padding-top: 10px;
+}
+
+.right-column {
+  border-top: 1px !important;
+  padding-top: 10px;
+}
+
+.h2Titulo {
+  padding-bottom: 5px;
+  padding-top: 3px;
+}
+
+.BotonesFiltrar {
+  display: flex;
+  justify-content: center;
+}
+
+.BotonFiltrar {
+  text-align: center;
+  padding-top: 10px;
 }
 
 
-.BotonesFuncionarios {
-    display: flex;
-    justify-content: flex-end;   
-
-}
-
-h3{
+h3 {
   font-size: 32px !important;
 }
-
 
 .custom-btn {
   width: 200px;
   height: 45px;
   color: white;
   margin-left: 20px;
+
+}
+
+.table {
+  width: 100%;
+  width: calc(100% - 0px); /* Ajusta el ancho de la tabla para dejar espacio a los lados */
+  margin: auto;
+  margin-bottom: 20px;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+
+
+.export{
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 215px;
+}
+
+.botonVolver{
+  
+  margin-top: 10px;
 }
