@@ -3,35 +3,35 @@ import './css/ListarTrabajador.css';
 import React, { useEffect, useState } from 'react';
 import axios from '../axiosConfig/';
 
-const sexos = [
-  { id_sexo: 1, descripcion: 'Masculino' },
-  { id_sexo: 2, descripcion: 'Femenino' },
-  { id_sexo: 3, descripcion: 'Otro' }
-];
-
-const cargos = [
-  { id_cargo: 1, descripcion: 'Administrativo' },
-  { id_cargo: 2, descripcion: 'Jefe de recursos humanos' },
-  { id_cargo: 3, descripcion: 'Analista programador' },
-  { id_cargo: 4, descripcion: 'Soporte TI' },
-  { id_cargo: 5, descripcion: 'Encargado de Ventas' },
-  { id_cargo: 6, descripcion: 'Encargado de Logística' }
-];
-
-const areas = [
-  { id_area: 1, descripcion: 'Recursos Humanos' },
-  { id_area: 2, descripcion: 'Soporte TI' },
-  { id_area: 3, descripcion: 'Finanzas' },
-  { id_area: 4, descripcion: 'Jurídica' },
-  { id_area: 5, descripcion: 'Ventas' },
-  { id_area: 6, descripcion: 'Logística' }
-];
-
-function ListarTrabajador() {
+const ListarTrabajador = () => {
   const [trabajadores, setTrabajadores] = useState([]);
   const [idSexo, setIdSexo] = useState('');
   const [idCargo, setIdCargo] = useState('');
   const [idArea, setIdArea] = useState('');
+
+  const sexos = [
+    { id: 1, descripcion: 'Masculino' },
+    { id: 2, descripcion: 'Femenino' },
+    { id: 3, descripcion: 'Otro' }
+  ];
+
+  const cargos = [
+    { id: 1, descripcion: 'Administrativo' },
+    { id: 2, descripcion: 'Jefe de recursos humanos' },
+    { id: 3, descripcion: 'Analista programador' },
+    { id: 4, descripcion: 'Soporte TI' },
+    { id: 5, descripcion: 'Encargado de Ventas' },
+    { id: 6, descripcion: 'Encargado de Logística' }
+  ];
+
+  const areas = [
+    { id: 1, descripcion: 'Recursos Humanos' },
+    { id: 2, descripcion: 'Soporte TI' },
+    { id: 3, descripcion: 'Finanzas' },
+    { id: 4, descripcion: 'Jurídica' },
+    { id: 5, descripcion: 'Ventas' },
+    { id: 6, descripcion: 'Logística' }
+  ];
 
   useEffect(() => {
     fetchTrabajadores();
@@ -45,6 +45,7 @@ function ListarTrabajador() {
 
     axios.get(`/usuarios?${queryParams}`)
       .then(response => {
+        console.log("Datos recibidos del API:", response.data);
         setTrabajadores(response.data);
       })
       .catch(error => {
@@ -80,6 +81,11 @@ function ListarTrabajador() {
     });
   };
 
+  const capitalize = (text) => {
+    if (!text) return 'N/A';
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
+
   return (
     <>
       <nav className="navbar navbar-light" style={{ backgroundColor: "#8FC1E3" }} data-mdb-theme="light">
@@ -91,7 +97,7 @@ function ListarTrabajador() {
           </a>
         </div>
       </nav>
-      <h1 className="Titulo">Listar Trabajador</h1>
+      <h1 className="Titulo">Lista de Trabajadores</h1>
       <br />
       <div className="BotonesFiltrar">
         <div className="dropdown">
@@ -104,10 +110,10 @@ function ListarTrabajador() {
           >
             <option value="">Sexo</option>
             {sexos.map(sexo => (
-              <option key={sexo.id_sexo} value={sexo.id_sexo}>{sexo.descripcion}</option>
+              <option key={sexo.id} value={sexo.id}>{sexo.descripcion}</option>
             ))}
           </select>
-          
+
           <select
             className="btn btn-primary btn-lg"
             id="cargoDropdown"
@@ -117,7 +123,7 @@ function ListarTrabajador() {
           >
             <option value="">Cargo</option>
             {cargos.map(cargo => (
-              <option key={cargo.id_cargo} value={cargo.id_cargo}>{cargo.descripcion}</option>
+              <option key={cargo.id} value={cargo.id}>{cargo.descripcion}</option>
             ))}
           </select>
 
@@ -130,12 +136,21 @@ function ListarTrabajador() {
           >
             <option value="">Departamento</option>
             {areas.map(area => (
-              <option key={area.id_area} value={area.id_area}>{area.descripcion}</option>
+              <option key={area.id} value={area.id}>{area.descripcion}</option>
             ))}
           </select>
+          <div className="BotonesFuncionarios">
+        <button type="button" className="btn btn-primary btn-lg custom-btn export" onClick={handleExport}>
+          Exportar
+        </button>
+        <Link to="/users" className="btn btn-primary btn-lg custom-btn botonVolver">
+          Volver
+        </Link>
+      </div>
         </div>
       </div>
       <div className="content-box">
+      
         <div className="Tabla">
           <table className="table table-striped table-hover">
             <thead>
@@ -154,29 +169,23 @@ function ListarTrabajador() {
             <tbody>
               {trabajadores.map(trabajador => (
                 <tr key={trabajador.user_id}>
-                  <td>{trabajador.trabajador.nombres}</td>
-                  <td>{trabajador.trabajador.apellido_paterno} {trabajador.trabajador.apellido_materno}</td>
+                  <td>{capitalize(trabajador.trabajador.nombres)}</td>
+                  <td>{capitalize(`${trabajador.trabajador.apellido_paterno} ${trabajador.trabajador.apellido_materno}`)}</td>
                   <td>{trabajador.trabajador.rut}-{trabajador.trabajador.dv}</td>
-                  <td>{sexos.find(sexo => sexo.id_sexo === trabajador.trabajador.id_sexo)?.descripcion || 'N/A'}</td>
-                  <td>{trabajador.trabajador.direccion}</td>
+                  <td>{trabajador.trabajador.sexo.descripcion}</td>
+                  <td>{capitalize(trabajador.trabajador.direccion)}</td>
                   <td>{trabajador.trabajador.telefono}</td>
-                  <td>{trabajador.trabajador.datosLaborales?.cargo?.descripcion || 'N/A'}</td>
-                  <td>{trabajador.trabajador.datosLaborales?.area?.descripcion || 'N/A'}</td>
+                  <td>{trabajador.trabajador.datosLaborales?.cargo.descripcion}</td>
+                  <td>{trabajador.trabajador.datosLaborales?.area.descripcion}</td>
                   <td>{trabajador.trabajador.datosLaborales?.fecha_ingreso ? formatFechaIngreso(trabajador.trabajador.datosLaborales.fecha_ingreso) : 'N/A'}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-        <div className="BotonesFuncionarios">
-          <button type="button" className="btn btn-primary btn-lg custom-btn" onClick={handleExport}>
-            Exportar
-          </button>
-          <Link to="/users" className="btn btn-primary btn-lg custom-btn">
-            Volver
-          </Link>
+          
         </div>
       </div>
+     
     </>
   );
 }

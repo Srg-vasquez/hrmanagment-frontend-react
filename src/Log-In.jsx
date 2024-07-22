@@ -37,7 +37,7 @@ function LogIn() {
         <div className="login-container">
           <div className="login-image"></div>
           <div className="login wrap">
-            
+          <img src="/Icons/user-circle-svgrepo-com (5).svg" alt="Icon" className="IconLogin" />
             <form onSubmit={handleLogin}>
               <input
                 placeholder="Ingrese su cuenta"
@@ -82,7 +82,7 @@ function LogIn() {
                 </h5>
                 <button
                   type="button"
-                  className="btn-close"
+                  className="btn-closee"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 />

@@ -1,9 +1,9 @@
 body{
-    background-color: #E3EDF9 !important;
+    background-color: #d4e5fc !important;
 
 }
 
-.navbar {
+.nabvar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,8 +11,10 @@ body{
 
 .Icon {
     margin-left: 20px;
-    width: 100px;
-    height: 100px;
+    width: 380px;
+    
+
+   
 }
 
 .Log-Out {
@@ -34,10 +36,10 @@ body{
 .content-box{
 box-sizing: content-box;
 background-color: rgb(255, 255, 255);
-margin: 20px 20px 20px 20px;
+margin: 50px 20px 20px 20px;
 padding-left: 20px;
 border-radius: 10px;
-box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
 padding-right: 20px;
 
 .contenedorDerecho{
@@ -53,6 +55,8 @@ h3{
   margin-bottom: 20px;
   
 }
+
+
 
 .Titulo{
     text-align: center !important;
@@ -80,6 +84,7 @@ h3{
 .Botones{
     text-align: right; 
     margin-top: 20px; 
+
     
     
 }
@@ -93,15 +98,20 @@ h3{
 
 .botonUsuario{
     margin-top: 40px;
-    width: 700px;
+    width: 500px;
     margin-bottom: 25px;
-    margin-left: 30px;
+    margin-left: 200px;
+    background-color: #174d60 !important;
 }
-
+.botonUsuario:hover{
+  background: linear-gradient(144deg, #174d60, #b21fdf 50%, #2b4ec2);
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
 
 .card {
     image-orientation:flip;
-    width: 50%;
+    width: 70%;
     text-align: center;
    border-radius: 5px;
     text-align: center;
@@ -144,6 +154,7 @@ h3{
   .userIcon{
     width: 6%;
     margin-right: 50px;
+    
   }
 
   .listIcon{
@@ -186,7 +197,7 @@ h3{
 
 .tituloUsers{
   font-size: 45px;
-  margin-left: 250px;
+  margin-left: 355px;
 }
 
 
@@ -225,26 +236,26 @@ h3{
 /* perfil usuario */
 
 .e-card {
-  margin: 100px auto;
+  margin: 100px 100px 50px 20px;
   background: transparent;
-  box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.45);
+  box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.80);
   position: relative;
-  width: 440px;
-  height: 360px;
+  width: 540px;
+  height: 460px;
   border-radius: 16px;
   overflow: hidden;
 }
 
 .wave {
   position: absolute;
-  width: 700px;
+  width: 800px;
   height: 960px;
-  opacity: 0.6;
-  left: 0;
+  opacity: 0.8;
+  left: 2;
   top: 0;
   margin-left: -50%;
   margin-top: -70%;
-  background: linear-gradient(744deg,#af40ff,#5b42f3 60%,#00ddeb);
+  background: linear-gradient(744deg,#cbce3b,#174d60 60%,#19a3ff);
 }
 
 .icon {

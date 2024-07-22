@@ -320,6 +320,8 @@ function InformacionPersonal() {
               <div className="Botones">
                 <button type="submit" className="btn btn-success btn-lg custom-btn">Guardar</button>
                 <Link to="/users" className="btn btn-primary btn-lg custom-btn">Volver</Link>
+                
+
               </div>
             </div>
           </div>
