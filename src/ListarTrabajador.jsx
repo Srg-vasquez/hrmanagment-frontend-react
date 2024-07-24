@@ -92,10 +92,10 @@ const ListarTrabajador = () => {
         <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
         <div className="logOut">
         <a href="/users">
-            <img src="/Icons/home-3-svgrepo-com (1).svg" alt="Log out" className="Log-Out" />
+            <img src="/Icons/house-.svg" alt="Log out" className="HomeIcon" />
           </a>
           <a href="/">
-            <img src="/Icons/log-out.svg" alt="Log out" className="Log-Out" />
+            <img src="/Icons/exit-svgrepo-com.svg" alt="Log out" className="Log-Out" />
           </a>
         </div>
       </nav>

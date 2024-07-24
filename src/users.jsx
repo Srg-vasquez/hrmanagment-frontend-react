@@ -74,7 +74,7 @@ function UsersPage() {
         <div className="logOut">
           <Link to="/">
             <img
-              src="/Icons/log-out.svg"
+              src="/Icons/exit-svgrepo-com.svg"
               alt="Log out"
               className="Log-Out"
             />
