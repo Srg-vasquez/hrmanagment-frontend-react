@@ -38,11 +38,14 @@ body{
 .content-box{
 box-sizing: content-box;
 background-color: rgb(255, 255, 255);
-margin: 50px 20px 20px 20px;
+margin: 50px 190px 0px 200px;
 padding-left: 20px;
 border-radius: 10px;
 box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
 padding-right: 20px;
+width: 80%;
+height: 700px;
+
 
 .contenedorDerecho{
     padding: 0;
@@ -102,8 +105,10 @@ h3{
     margin-top: 25px;
     width: 550px;
     margin-bottom: 20px;
-    margin-left: 320px;
+    margin-left: 300px;
     background-color: #174d60 !important;
+    border: #b21fdf;
+    
 }
 .botonUsuario:hover{
   background: linear-gradient(144deg, #174d60, #b21fdf 50%, #2b4ec2);
@@ -133,7 +138,7 @@ h3{
     display: inline-block;
     padding: 8px;
     color: white;
-    background-color: #3498DB;
+    background-color: #000000;
     text-align: center;
     cursor: pointer;
     width: 100%;
@@ -154,14 +159,15 @@ h3{
 
 
   .userIcon{
-    width: 6%;
-    margin-right: 50px;
+    width: 7%;
+    margin-right: 20%;
+    
     
   }
 
   .listIcon{
-    width: 6%;
-    margin-right: 90px;
+    width: 7%;
+ 
   }
 
   .searchIcon{
@@ -238,13 +244,13 @@ h3{
 /* perfil usuario */
 
 .e-card {
-  margin: 87px 100px 50px 20px;
+  margin: 85px 100px 50px 20px;
   background: transparent;
-  box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.80);
+  box-shadow: 0px 8px 28px -0px rgba(0,0,0,0.80);
   position: relative;
-  width: 550px;
-  height: 450px;
-  border-radius: 16px;
+  width: 480px;
+  height: 460px;
+  border-radius: 20px;
   overflow: hidden;
   margin-left: 200px;
 }
