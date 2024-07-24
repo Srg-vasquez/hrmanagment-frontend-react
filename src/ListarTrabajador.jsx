@@ -88,12 +88,11 @@ const ListarTrabajador = () => {
 
   return (
     <>
-      <nav className="navbar navbar-light" style={{ backgroundColor: "#8FC1E3" }} data-mdb-theme="light">
-        <img src="/Icons/envelope-svgrepo-com.svg" alt="Icon" className="Icon" />
-        <div className="Rol-Usuario">@USUARIO</div>
+      <nav className="navbar navbar-light" style={{ backgroundColor: "#4d8fac" }} data-mdb-theme="light">
+        <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
         <div className="logOut">
           <a href="/">
-            <img src="/Icons/sign-out-svgrepo-com.svg" alt="Log out" className="Log-Out" />
+            <img src="/Icons/log-out.svg" alt="Log out" className="Log-Out" />
           </a>
         </div>
       </nav>

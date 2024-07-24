@@ -8,18 +8,33 @@ function UsersPage() {
   const [usuario, setUsuario] = useState({
     nombreCompleto: '',
     cargo: '',
+    area: '',
     rut: ''
   });
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
-      setPerfil(storedUser.perfil.id_perfil);
-      setUsuario({
-        nombreCompleto: `${storedUser.trabajador.nombres} ${storedUser.trabajador.apellido_paterno} ${storedUser.trabajador.apellido_materno}`,
-        cargo: storedUser.trabajador.datosLaborales.id_cargo,
-        rut: storedUser.trabajador.rut
-      });
+      setPerfil(storedUser.perfil?.id_perfil);
+      const userRut = storedUser.trabajador.rut;
+
+      const fetchUserData = async () => {
+        try {
+          const response = await axios.get(`/usuarios/${userRut}`);
+          const userData = response.data;
+          console.log('Datos recibidos del endpoint:', userData);
+          setUsuario({
+            nombreCompleto: `${userData.trabajador.nombres} ${userData.trabajador.apellido_paterno} ${userData.trabajador.apellido_materno}`,
+            cargo: userData.trabajador.datosLaborales?.cargo?.descripcion || '',
+            area: userData.trabajador.datosLaborales?.area?.descripcion || '',
+            rut: userData.trabajador.rut
+          });
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+
+      fetchUserData();
     }
   }, []);
 
@@ -152,10 +167,11 @@ function UsersPage() {
                 </svg>
                 <br />
                 <div className="infotop">
-                  <div className="user-name">{usuario.nombreCompleto}</div><br />
-                  <div className="user-cargo">{usuario.cargo}</div><br />
-                  <div className="user-area">{usuario.area}</div>
+                 <div className='NombreUsuario'>{usuario.nombreCompleto}</div>
+                  {usuario.cargo}<br />
+                  {usuario.area}
                 </div>
+                
               </div>
             </div>
           </div>

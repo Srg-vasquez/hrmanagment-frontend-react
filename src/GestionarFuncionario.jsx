@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../axiosConfig';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import './css/camposUsuario.css';
 import Modal from './modal.jsx';
 
 function GestionarFuncionario() {
   const location = useLocation();
-  const funcionario = location.state?.funcionario;
+  const navigate = useNavigate();
+  const [funcionario, setFuncionario] = useState(null);
 
   const [formData, setFormData] = useState({
     nombres: '',
@@ -19,8 +20,6 @@ function GestionarFuncionario() {
     id_sexo: '',
     id_cargo: '',
     fecha_ingreso: '',
-    contrasena: '',
-    confirmar_contrasena: '',
     nombre_contacto: '',
     id_relacion_contacto: '',
     telefono_contacto: '',
@@ -31,6 +30,7 @@ function GestionarFuncionario() {
     id_sexo_carga: '',
     id_relacion_carga: '',
     id_area: '',
+    id_perfil: '',
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -44,8 +44,8 @@ function GestionarFuncionario() {
 
   const cargos = [
     { id: 1, descripcion: 'Administrativo' },
-    { id: 2, descripcion: 'Jefe de recursos humanos' },
-    { id: 3, descripcion: 'Analista programador' },
+    { id: 2, descripcion: 'Jefe de Recursos Humanos' },
+    { id: 3, descripcion: 'Analista Programador' },
     { id: 4, descripcion: 'Soporte TI' },
     { id: 5, descripcion: 'Encargado de Ventas' },
     { id: 6, descripcion: 'Encargado de Logística' }
@@ -71,6 +71,28 @@ function GestionarFuncionario() {
     { id: 8, descripcion: 'Sin relación' }
   ];
 
+  const perfiles = [
+    { id: 1, descripcion: 'Administrador' },
+    { id: 2, descripcion: 'Visualizador' },
+    { id: 3, descripcion: 'Usuario' }
+  ];
+
+  useEffect(() => {
+    const fetchFuncionario = async () => {
+      const { rut } = location.state?.funcionario?.trabajador;
+      if (rut) {
+        try {
+          const response = await axios.get(`/usuarios/${rut}`);
+          setFuncionario(response.data);
+        } catch (error) {
+          console.error('Error fetching funcionario data:', error);
+        }
+      }
+    };
+
+    fetchFuncionario();
+  }, [location.state]);
+
   useEffect(() => {
     if (funcionario) {
       setFormData({
@@ -81,21 +103,20 @@ function GestionarFuncionario() {
         dv: funcionario.trabajador.dv || '',
         direccion: funcionario.trabajador.direccion || '',
         telefono: funcionario.trabajador.telefono ? funcionario.trabajador.telefono.toString() : '',
-        id_sexo: funcionario.trabajador.id_sexo ? funcionario.trabajador.id_sexo : '',
-        id_cargo: funcionario.trabajador.datosLaborales?.id_cargo ? funcionario.trabajador.datosLaborales.id_cargo : '',
+        id_sexo: funcionario.trabajador.sexo?.id_sexo ? funcionario.trabajador.sexo.id_sexo.toString() : '',
+        id_cargo: funcionario.trabajador.datosLaborales?.cargo?.id_cargo ? funcionario.trabajador.datosLaborales.cargo.id_cargo.toString() : '',
         fecha_ingreso: funcionario.trabajador.datosLaborales?.fecha_ingreso ? new Date(funcionario.trabajador.datosLaborales.fecha_ingreso).toISOString().split('T')[0] : '',
         nombre_contacto: funcionario.trabajador.contactoEmergencia?.nombre_completo || '',
-        id_relacion_contacto: funcionario.trabajador.contactoEmergencia?.id_relacion ? funcionario.trabajador.contactoEmergencia.id_relacion : '',
+        id_relacion_contacto: funcionario.trabajador.contactoEmergencia?.relacion?.id_relacion ? funcionario.trabajador.contactoEmergencia.relacion.id_relacion.toString() : '',
         telefono_contacto: funcionario.trabajador.contactoEmergencia?.telefono ? funcionario.trabajador.contactoEmergencia.telefono.toString() : '',
         nombre_carga: funcionario.trabajador.cargaFamiliar?.nombre_completo.split(' ')[0] || '',
         apellido_carga: funcionario.trabajador.cargaFamiliar?.nombre_completo.split(' ')[1] || '',
         rut_carga: funcionario.trabajador.cargaFamiliar?.rut ? funcionario.trabajador.cargaFamiliar.rut.toString() : '',
         dv_carga: funcionario.trabajador.cargaFamiliar?.dv || '',
-        id_sexo_carga: funcionario.trabajador.cargaFamiliar?.id_sexo ? funcionario.trabajador.cargaFamiliar.id_sexo : '',
-        id_relacion_carga: funcionario.trabajador.cargaFamiliar?.id_relacion ? funcionario.trabajador.cargaFamiliar.id_relacion : '',
-        id_area: funcionario.trabajador.datosLaborales?.id_area ? funcionario.trabajador.datosLaborales.id_area : '',
-        contrasena: '',
-        confirmar_contrasena: '',
+        id_sexo_carga: funcionario.trabajador.cargaFamiliar?.sexo?.id_sexo ? funcionario.trabajador.cargaFamiliar.sexo.id_sexo.toString() : '',
+        id_relacion_carga: funcionario.trabajador.cargaFamiliar?.relacion?.id_relacion ? funcionario.trabajador.cargaFamiliar.relacion.id_relacion.toString() : '',
+        id_area: funcionario.trabajador.datosLaborales?.area?.id_area ? funcionario.trabajador.datosLaborales.area.id_area.toString() : '',
+        id_perfil: funcionario.perfil?.id_perfil ? funcionario.perfil.id_perfil.toString() : '',
       });
     }
   }, [funcionario]);
@@ -107,43 +128,6 @@ function GestionarFuncionario() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.contrasena !== formData.confirmar_contrasena) {
-      alert('Las contraseñas no coinciden.');
-      return;
-    }
-
-    const payload = {
-      username: formData.rut.toString(),
-      password: formData.contrasena,
-      id_perfil: 1,
-      trabajador: {
-        nombres: formData.nombres,
-        apellido_paterno: formData.apellido_paterno,
-        apellido_materno: formData.apellido_materno,
-        rut: parseInt(formData.rut, 10),
-        dv: formData.dv,
-        id_sexo: parseInt(formData.id_sexo, 10),
-        direccion: formData.direccion,
-        telefono: parseInt(formData.telefono, 10),
-        datosLaborales: {
-          id_cargo: parseInt(formData.id_cargo, 10),
-          fecha_ingreso: formData.fecha_ingreso,
-          id_area: parseInt(formData.id_area, 10),
-        },
-        contactoEmergencia: {
-          nombre_completo: formData.nombre_contacto,
-          id_relacion: parseInt(formData.id_relacion_contacto, 10),
-          telefono: parseInt(formData.telefono_contacto, 10),
-        },
-        cargaFamiliar: {
-          nombre_completo: `${formData.nombre_carga} ${formData.apellido_carga}`,
-          rut: parseInt(formData.rut_carga, 10),
-          dv: formData.dv_carga,
-          id_sexo: parseInt(formData.id_sexo_carga, 10),
-          id_relacion: parseInt(formData.id_relacion_carga, 10),
-        },
-      },
-    };
 
     setModalType('update');
     setShowModal(true);
@@ -159,6 +143,7 @@ function GestionarFuncionario() {
       await axios.delete(`/usuarios/${formData.rut}`);
       setShowModal(false);
       alert('Funcionario eliminado correctamente!');
+      navigate('/buscar_funcionario');
     } catch (error) {
       console.error('Hubo un error al eliminar el trabajador!', error.response?.data || error);
       alert('Hubo un error al eliminar el trabajador!');
@@ -176,8 +161,7 @@ function GestionarFuncionario() {
   const updateFuncionario = async () => {
     const payload = {
       username: formData.rut.toString(),
-      password: formData.contrasena,
-      id_perfil: 1,
+      id_perfil: parseInt(formData.id_perfil, 10),
       trabajador: {
         nombres: formData.nombres,
         apellido_paterno: formData.apellido_paterno,
@@ -211,6 +195,7 @@ function GestionarFuncionario() {
       await axios.put(`/usuarios/${formData.rut}`, payload);
       setShowModal(false);
       alert('Funcionario actualizado con éxito!');
+      navigate(0); // Reload the page
     } catch (error) {
       console.error('Hubo un error al actualizar el trabajador!', error.response?.data || error);
       alert('Hubo un error al actualizar el trabajador!');
@@ -219,12 +204,12 @@ function GestionarFuncionario() {
 
   return (
     <div id="GestionarFuncionario">
-      <nav className="navbar navbar-light" style={{ backgroundColor: "#8FC1E3" }} data-mdb-theme="light">
-        <img src="/Icons/envelope-svgrepo-com.svg" alt="Icon" className="Icon" />
-        <div className="Rol-Usuario">@USUARIO</div>
+      <nav className="navbar navbar-light" style={{ backgroundColor: "#4d8fac" }} data-mdb-theme="light">
+        <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
+        
         <div className="logOut">
           <a href="/Icons/sign-out-svgrepo-com.svg">
-            <img src="/Icons/sign-out-svgrepo-com.svg" alt="Log out" className="Log-Out" />
+            <img src="/Icons/log-out.svg" alt="Log out" className="Log-Out" />
           </a>
         </div>
       </nav>
@@ -418,6 +403,24 @@ function GestionarFuncionario() {
                     Área
                   </div>
                 </div>
+                <div className="col">
+                  <div data-mdb-input-init="" className="form-outline">
+                    <select
+                      type="text"
+                      id="id_perfil"
+                      name="id_perfil"
+                      className="form-select"
+                      value={formData.id_perfil}
+                      onChange={handleChange}
+                      required 
+                    >
+                      {perfiles.map((perfil) => (
+                        <option key={perfil.id} value={perfil.id}>{perfil.descripcion}</option>
+                      ))}
+                    </select>
+                    Perfil
+                  </div>
+                </div>
               </div>
             </div>
             <div className="col-md-6">
@@ -581,7 +584,7 @@ function GestionarFuncionario() {
           <div className="Botones">
             <button type="submit" className="btn btn-success btn-lg custom-btn">Actualizar Registro</button>
             <button type="button" className="btn btn-danger btn-lg custom-btn" onClick={handleDelete}>Eliminar Funcionario</button>
-            <Link to="/users" className="btn btn-primary btn-lg custom-btn">Volver</Link>
+            <Link to="/buscar_funcionario" className="btn btn-primary btn-lg custom-btn">Volver</Link>
           </div>
         </form>
       </div>
