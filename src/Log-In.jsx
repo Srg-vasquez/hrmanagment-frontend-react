@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig'; 
 import './css/Login.css';
@@ -8,7 +8,13 @@ function LogIn() {
   const [rut, setRut] = useState('');
   const [password, setPassword] = useState('');
 
-  // Función para manejar el inicio de sesión y la redirección
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      navigate('/users');
+    }
+  }, [navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -37,7 +43,7 @@ function LogIn() {
         <div className="login-container">
           <div className="login-image"></div>
           <div className="login wrap">
-          <img src="/Icons/user-circle-svgrepo-com (5).svg" alt="Icon" className="IconLogin" />
+            <img src="/Icons/user-circle-svgrepo-com (5).svg" alt="Icon" className="IconLogin" />
             <form onSubmit={handleLogin}>
               <input
                 placeholder="Ingrese su cuenta"

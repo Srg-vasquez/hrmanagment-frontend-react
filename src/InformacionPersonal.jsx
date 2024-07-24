@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../axiosConfig';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './css/InformacionPersonal.css';
 
 function InformacionPersonal() {
@@ -27,6 +27,8 @@ function InformacionPersonal() {
     id_area: '',
     id_perfil: '',
   });
+
+  const navigate = useNavigate();
 
   // Listas de valores para los selectores
   const sexos = [
@@ -161,15 +163,22 @@ function InformacionPersonal() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
   return (
     <>
       <nav className="navbar navbar-light" style={{ backgroundColor: "#4d8fac" }} data-mdb-theme="light">
         <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
-       
         <div className="logOut">
-          <Link to="/">
-            <img src="/Icons/log-out.svg" alt="Log out" className="Log-Out" />
-          </Link>
+          <img
+            src="/Icons/log-out.svg"
+            alt="Log out"
+            className="Log-Out"
+            onClick={handleLogout}
+          />
         </div>
       </nav>
       <h1 className="Titulo">Información Personal</h1>

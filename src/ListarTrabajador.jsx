@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './css/ListarTrabajador.css';
 import React, { useEffect, useState } from 'react';
 import axios from '../axiosConfig/';
@@ -8,6 +8,7 @@ const ListarTrabajador = () => {
   const [idSexo, setIdSexo] = useState('');
   const [idCargo, setIdCargo] = useState('');
   const [idArea, setIdArea] = useState('');
+  const navigate = useNavigate();
 
   const sexos = [
     { id: 1, descripcion: 'Masculino' },
@@ -86,17 +87,25 @@ const ListarTrabajador = () => {
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
   return (
     <>
       <nav className="navbar navbar-light" style={{ backgroundColor: "#4d8fac" }} data-mdb-theme="light">
         <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
         <div className="logOut">
-        <a href="/users">
-            <img src="/Icons/house-.svg" alt="Log out" className="HomeIcon" />
+          <a href="/users">
+            <img src="/Icons/house-.svg" alt="Home" className="HomeIcon" />
           </a>
-          <a href="/">
-            <img src="/Icons/exit-svgrepo-com.svg" alt="Log out" className="Log-Out" />
-          </a>
+          <img
+            src="/Icons/exit-svgrepo-com.svg"
+            alt="Log out"
+            className="Log-Out"
+            onClick={handleLogout}
+          />
         </div>
       </nav>
       <h1 className="Titulo">Lista de Trabajadores</h1>
@@ -142,15 +151,13 @@ const ListarTrabajador = () => {
             ))}
           </select>
           <div className="BotonesFuncionarios">
-        <button type="button" className="btn btn-primary btn-lg custom-btn export" onClick={handleExport}>
-          Exportar PDF
-        </button>
-        
-      </div>
+            <button type="button" className="btn btn-primary btn-lg custom-btn export" onClick={handleExport}>
+              Exportar PDF
+            </button>
+          </div>
         </div>
       </div>
-      <div className="content-box">
-      
+      <div className="content-box tablaGestioanr" >
         <div className="Tabla">
           <table className="table table-striped table-hover">
             <thead>
@@ -182,10 +189,8 @@ const ListarTrabajador = () => {
               ))}
             </tbody>
           </table>
-          
         </div>
       </div>
-     
     </>
   );
 }

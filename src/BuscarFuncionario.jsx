@@ -113,161 +113,166 @@ function BuscarFuncionario() {
     setFilteredFuncionarios(funcionarios);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
   return (
     <>
-      <div id="BuscarFuncionario">
-        <nav className="navbar navbar-light" style={{ backgroundColor: '#4d8fac' }} data-mdb-theme="light">
-          <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
-          <div className="logOut">
-            <a href="/">
-              <img src="/Icons/log-out.svg" alt="Log out" className="Log-Out" />
-            </a>
+      <nav className="navbar navbar-light" style={{ backgroundColor: '#4d8fac' }} data-mdb-theme="light">
+        <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
+        <div className="logOut">
+        <a href="/users">
+            <img src="/Icons/house-.svg" alt="Home" className="HomeIcon" />
+          </a>
+          <img
+            src="/Icons/exit-svgrepo-com.svg"
+            alt="Log out"
+            className="Log-Out"
+            onClick={handleLogout}
+          />
+        </div>
+      </nav>
+      <h1 className="Titulo">Buscar funcionario</h1>
+      <div className="row content-box">
+        <div className="col-md-6">
+          <div className="p-3 bg-light rounded fromright">
+            <form>
+              <label className="form-label" htmlFor="form6Example3">
+                Ingrese rut funcionario
+              </label>
+              <div className="row mb-4">
+                <div className="col">
+                  <div className="form-outline">
+                    <input
+                      placeholder="Ingrese rut (sin puntos ni DV)"
+                      type="text"
+                      id="form6Example3"
+                      className="form-control"
+                      name="rut"
+                      value={filters.rut}
+                      onChange={handleFilterChange}
+                    />
+                  </div>
+                </div>
+              </div>
+              <label className="form-label" htmlFor="form6Example4">
+                Ingrese nombre funcionario
+              </label>
+              <div className="row mb-4">
+                <div className="col">
+                  <div className="form-outline">
+                    <input
+                      placeholder="Ingrese nombre"
+                      type="text"
+                      id="form6Example4"
+                      className="form-control"
+                      name="nombre"
+                      value={filters.nombre}
+                      onChange={handleFilterChange}
+                    />
+                  </div>
+                </div>
+              </div>
+              <label className="form-label" htmlFor="id_sexo">
+                Selecciona el Sexo
+              </label>
+              <div className="row mb-4">
+                <div className="col">
+                  <select
+                    className="form-select"
+                    id="id_sexo"
+                    name="idSexo"
+                    value={filters.idSexo}
+                    onChange={handleFilterChange}
+                  >
+                    <option value="">Todos</option>
+                    {sexos.map((sexo) => (
+                      <option key={sexo.id} value={sexo.id}>{sexo.descripcion}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <label className="form-label" htmlFor="id_cargo">
+                Selecciona el Cargo
+              </label>
+              <div className="row mb-4">
+                <div className="col">
+                  <select
+                    className="form-select"
+                    id="id_cargo"
+                    name="idCargo"
+                    value={filters.idCargo}
+                    onChange={handleFilterChange}
+                  >
+                    <option value="">Todos</option>
+                    {cargos.map((cargo) => (
+                      <option key={cargo.id} value={cargo.id}>{cargo.descripcion}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <label className="form-label" htmlFor="id_area">
+                Selecciona el Área
+              </label>
+              <div className="row mb-4">
+                <div className="col">
+                  <select
+                    className="form-select"
+                    id="id_area"
+                    name="idArea"
+                    value={filters.idArea}
+                    onChange={handleFilterChange}
+                  >
+                    <option value="">Todos</option>
+                    {areas.map((area) => (
+                      <option key={area.id} value={area.id}>{area.descripcion}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </form>
           </div>
-        </nav>
-        <h1 className="Titulo">Buscar funcionario</h1>
+         
+        </div>
 
-        <div className="container">
-          <div className="row content-box">
-            <div className="col-md-6">
-              <div className="p-3 bg-light rounded fromright">
-                <form>
-                  <label className="form-label" htmlFor="form6Example3">
-                    Ingrese rut funcionario
-                  </label>
-                  <div className="row mb-4">
-                    <div className="col">
-                      <div className="form-outline">
-                        <input
-                          placeholder="Ingrese rut (sin puntos ni DV)"
-                          type="text"
-                          id="form6Example3"
-                          className="form-control"
-                          name="rut"
-                          value={filters.rut}
-                          onChange={handleFilterChange}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <label className="form-label" htmlFor="form6Example4">
-                    Ingrese nombre funcionario
-                  </label>
-                  <div className="row mb-4">
-                    <div className="col">
-                      <div className="form-outline">
-                        <input
-                          placeholder="Ingrese nombre"
-                          type="text"
-                          id="form6Example4"
-                          className="form-control"
-                          name="nombre"
-                          value={filters.nombre}
-                          onChange={handleFilterChange}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <label className="form-label" htmlFor="id_sexo">
-                    Selecciona el Sexo
-                  </label>
-                  <div className="row mb-4">
-                    <div className="col">
-                      <select
-                        className="form-select"
-                        id="id_sexo"
-                        name="idSexo"
-                        value={filters.idSexo}
-                        onChange={handleFilterChange}
-                      >
-                        <option value="">Todos</option>
-                        {sexos.map((sexo) => (
-                          <option key={sexo.id} value={sexo.id}>{sexo.descripcion}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                  <label className="form-label" htmlFor="id_cargo">
-                    Selecciona el Cargo
-                  </label>
-                  <div className="row mb-4">
-                    <div className="col">
-                      <select
-                        className="form-select"
-                        id="id_cargo"
-                        name="idCargo"
-                        value={filters.idCargo}
-                        onChange={handleFilterChange}
-                      >
-                        <option value="">Todos</option>
-                        {cargos.map((cargo) => (
-                          <option key={cargo.id} value={cargo.id}>{cargo.descripcion}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                  <label className="form-label" htmlFor="id_area">
-                    Selecciona el Área
-                  </label>
-                  <div className="row mb-4">
-                    <div className="col">
-                      <select
-                        className="form-select"
-                        id="id_area"
-                        name="idArea"
-                        value={filters.idArea}
-                        onChange={handleFilterChange}
-                      >
-                        <option value="">Todos</option>
-                        {areas.map((area) => (
-                          <option key={area.id} value={area.id}>{area.descripcion}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div className="Botones d-flex justify-content-end mt-4">
-                <button type="button" className="btn btn-primary btn-lg custom-btn" onClick={handleResetFilters}>Limpiar</button>
-                <Link to="/users" className="btn btn-primary btn-lg custom-btn">Volver</Link>
-              </div>
-            </div>
-
-            <div className="col-md-6">
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Rut</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Cargo</th>
-                    <th scope="col">Área</th>
-                    <th scope="col">Editar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredFuncionarios.length > 0 ? (
-                    filteredFuncionarios.map((funcionario, index) => (
-                      <tr key={`${funcionario.trabajador.rut}-${index}`}>
-                        <td>{funcionario.trabajador.nombres}</td>
-                        <td>{`${funcionario.trabajador.apellido_paterno} ${funcionario.trabajador.apellido_materno}`}</td>
-                        <td>{`${funcionario.trabajador.rut}-${funcionario.trabajador.dv}`}</td>
-                        <td>{funcionario.trabajador.sexo.descripcion}</td>
-                        <td>{funcionario.trabajador.datosLaborales?.cargo?.descripcion || 'N/A'}</td>
-                        <td>{funcionario.trabajador.datosLaborales?.area?.descripcion || 'N/A'}</td>
-                        <td>
-                          <button onClick={() => handleEdit(funcionario)} className="btn btn-warning botonWrng">Editar</button>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="7">No hay funcionarios que coincidan con la búsqueda</td>
+        <div className="col-md-6">
+          <div className="table-container">
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellido</th>
+                  <th scope="col">Rut</th>
+                  <th scope="col">Sexo</th>
+                  <th scope="col">Cargo</th>
+                  <th scope="col">Área</th>
+                  <th scope="col">Editar</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredFuncionarios.length > 0 ? (
+                  filteredFuncionarios.map((funcionario, index) => (
+                    <tr key={`${funcionario.trabajador.rut}-${index}`}>
+                      <td>{funcionario.trabajador.nombres}</td>
+                      <td>{`${funcionario.trabajador.apellido_paterno} ${funcionario.trabajador.apellido_materno}`}</td>
+                      <td>{`${funcionario.trabajador.rut}-${funcionario.trabajador.dv}`}</td>
+                      <td>{funcionario.trabajador.sexo.descripcion}</td>
+                      <td>{funcionario.trabajador.datosLaborales?.cargo?.descripcion || 'N/A'}</td>
+                      <td>{funcionario.trabajador.datosLaborales?.area?.descripcion || 'N/A'}</td>
+                      <td>
+                        <button onClick={() => handleEdit(funcionario)} className="btn btn-warning botonWrng">Editar</button>
+                      </td>
                     </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="7">No hay funcionarios que coincidan con la búsqueda</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import './css/Users.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 
@@ -11,6 +11,7 @@ function UsersPage() {
     area: '',
     rut: ''
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -37,6 +38,11 @@ function UsersPage() {
       fetchUserData();
     }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/');
+  };
 
   const handleDownloadCertificado = async () => {
     try {
@@ -65,20 +71,16 @@ function UsersPage() {
       />
       <title>Usuario</title>
 
-      <nav
-        className="navbar navbar-light nabvar"
-        style={{ backgroundColor: "#4d8fac" }}
-      >
+      <nav className="navbar navbar-light nabvar" style={{ backgroundColor: "#4d8fac" }}>
         <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
         <div className="user-info"></div>
         <div className="logOut">
-          <Link to="/">
-            <img
-              src="/Icons/exit-svgrepo-com.svg"
-              alt="Log out"
-              className="Log-Out"
-            />
-          </Link>
+          <img
+            src="/Icons/exit-svgrepo-com.svg"
+            alt="Log out"
+            className="Log-Out"
+            onClick={handleLogout}
+          />
         </div>
       </nav>
       <div className="content-box">
@@ -167,11 +169,10 @@ function UsersPage() {
                 </svg>
                 <br />
                 <div className="infotop">
-                 <div className='NombreUsuario'>{usuario.nombreCompleto}</div>
+                  <div className="NombreUsuario">{usuario.nombreCompleto}</div>
                   {usuario.cargo}<br />
                   {usuario.area}
                 </div>
-                
               </div>
             </div>
           </div>

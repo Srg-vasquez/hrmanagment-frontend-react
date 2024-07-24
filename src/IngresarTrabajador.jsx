@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import axios from '../axiosConfig';
 import './css/camposUsuario.css';
-import { Link,  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function IngresarTrabajador() {
-  
   const [formData, setFormData] = useState({
     nombres: '',
     apellido_paterno: '',
@@ -33,6 +32,7 @@ function IngresarTrabajador() {
 
   const [message, setMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -98,7 +98,11 @@ function IngresarTrabajador() {
 
   const handleCloseModal = () => {
     setShowModal(false);
-   
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/');
   };
 
   return (
@@ -106,9 +110,12 @@ function IngresarTrabajador() {
       <nav className="navbar navbar-light" style={{ backgroundColor: "#4d8fac" }} data-mdb-theme="light">
         <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
         <div className="logOut">
-          <a href="iconLogOut">
-            <img src="/Icons/log-out.svg" alt="Log out" className="Log-Out" />
-          </a>
+          <img
+            src="/Icons/log-out.svg"
+            alt="Log out"
+            className="Log-Out"
+            onClick={handleLogout}
+          />
         </div>
       </nav>
       <h1 className="Titulo">Ingresar Trabajador</h1>
@@ -261,7 +268,7 @@ function IngresarTrabajador() {
                       className="form-select"
                       value={formData.id_cargo}
                       onChange={handleChange}
-                      required 
+                      required
                     >
                       <option value="">Elija una opción...</option>
                       <option value={1}>Administrativo</option>
@@ -299,7 +306,7 @@ function IngresarTrabajador() {
                       className="form-select"
                       value={formData.id_area}
                       onChange={handleChange}
-                      required 
+                      required
                     >
                       <option value="">Elija una opción...</option>
                       <option value={1}>Recursos Humanos</option>
@@ -558,9 +565,9 @@ function IngresarTrabajador() {
                 <img src="/Icons/Iconos-botones/checklist.svg" alt="Éxito" className="img-fluid Iconcheck " />
               </div>
               <div className="modal-footer">
-              <Link to="/users" className="btn btn-primary btn-lg custom-btn">
-              Volver
-            </Link>
+                <Link to="/users" className="btn btn-primary btn-lg custom-btn">
+                  Volver
+                </Link>
               </div>
             </div>
           </div>

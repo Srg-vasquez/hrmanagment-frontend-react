@@ -162,3 +162,9 @@ h3 {
   background-color: #174d60; /* Cambia esto al color que desees para la opción resaltada */
   color: white; /* Cambia esto al color que desees para el texto de la opción resaltada */
 }
+
+
+.tablaGestioanr{
+
+padding-top: 0px !important;
+}

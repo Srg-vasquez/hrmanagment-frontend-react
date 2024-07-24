@@ -9,20 +9,61 @@ import IngresarTrabajador from './IngresarTrabajador.jsx';
 import ListarTrabajador from './ListarTrabajador.jsx';
 import LogIn from './Log-In.jsx';
 import UsersPage from './users.jsx';
-
-
+import PrivateRoute from './PrivateRoute.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
       <Routes>
         <Route path="/" element={<LogIn />} />
-        <Route path="/buscar_funcionario" element={<BuscarFuncionario />} />
-        <Route path="/gestionar_funcionario" element={<GestionarFuncionario />} />
-        <Route path="/informacion_personal" element={<InformacionPersonal />} />
-        <Route path="/ingresar_trabajador" element={<IngresarTrabajador />} />
-        <Route path="/listar_trabajador" element={<ListarTrabajador />} />
-        <Route path="/users" element={<UsersPage />} />
+        <Route 
+          path="/buscar_funcionario" 
+          element={
+            <PrivateRoute allowedRoles={[1]}>
+              <BuscarFuncionario />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/gestionar_funcionario" 
+          element={
+            <PrivateRoute allowedRoles={[1]}>
+              <GestionarFuncionario />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/informacion_personal" 
+          element={
+            <PrivateRoute allowedRoles={[1, 2, 3]}>
+              <InformacionPersonal />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/ingresar_trabajador" 
+          element={
+            <PrivateRoute allowedRoles={[1]}>
+              <IngresarTrabajador />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/listar_trabajador" 
+          element={
+            <PrivateRoute allowedRoles={[1, 2]}>
+              <ListarTrabajador />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/users" 
+          element={
+            <PrivateRoute allowedRoles={[1, 2, 3]}>
+              <UsersPage />
+            </PrivateRoute>
+          } 
+        />
       </Routes>
     </Router>
   </React.StrictMode>

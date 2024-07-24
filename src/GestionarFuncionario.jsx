@@ -202,15 +202,18 @@ function GestionarFuncionario() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
   return (
     <div id="GestionarFuncionario">
       <nav className="navbar navbar-light" style={{ backgroundColor: "#4d8fac" }} data-mdb-theme="light">
         <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
         
         <div className="logOut">
-          <a href="/Icons/sign-out-svgrepo-com.svg">
-            <img src="/Icons/log-out.svg" alt="Log out" className="Log-Out" />
-          </a>
+          <img src="/Icons/log-out.svg" alt="Log out" className="Log-Out" onClick={handleLogout} />
         </div>
       </nav>
       <h1 className="Titulo">Gestionar Funcionario</h1>
@@ -438,7 +441,6 @@ function GestionarFuncionario() {
                       className="form-control"
                       value={formData.nombre_contacto}
                       onChange={handleChange}
-                      required
                     />
                     <label className="form-label" htmlFor="nombre_contacto">Nombre contacto de emergencia</label>
                   </div>
@@ -451,7 +453,6 @@ function GestionarFuncionario() {
                       name="id_relacion_contacto"
                       value={formData.id_relacion_contacto}
                       onChange={handleChange}
-                      required
                     >
                       {relaciones.map((relacion) => (
                         <option key={relacion.id} value={relacion.id}>{relacion.descripcion}</option>
@@ -472,7 +473,6 @@ function GestionarFuncionario() {
                       className="form-control"
                       value={formData.telefono_contacto}
                       onChange={handleChange}
-                      required
                     />
                     <label className="form-label" htmlFor="telefono_contacto">Telefono de emergencia</label>
                   </div>
@@ -492,7 +492,6 @@ function GestionarFuncionario() {
                       className="form-control"
                       value={formData.nombre_carga}
                       onChange={handleChange}
-                      required
                     />
                     <label className="form-label" htmlFor="nombre_carga">Nombre Carga Familiar</label>
                   </div>
@@ -507,7 +506,6 @@ function GestionarFuncionario() {
                       className="form-control"
                       value={formData.apellido_carga}
                       onChange={handleChange}
-                      required
                     />
                     <label className="form-label" htmlFor="apellido_carga">Apellido</label>
                   </div>
@@ -524,7 +522,6 @@ function GestionarFuncionario() {
                       className="form-control"
                       value={formData.rut_carga}
                       onChange={handleChange}
-                      required
                     />
                     <label className="form-label" htmlFor="rut_carga">RUT</label>
                   </div>
@@ -539,7 +536,6 @@ function GestionarFuncionario() {
                       className="form-control"
                       value={formData.dv_carga}
                       onChange={handleChange}
-                      required
                     />
                     <label className="form-label" htmlFor="dv_carga">DV</label>
                   </div>
@@ -554,7 +550,6 @@ function GestionarFuncionario() {
                       name="id_relacion_carga"
                       value={formData.id_relacion_carga}
                       onChange={handleChange}
-                      required
                     >
                       {relaciones.map((relacion) => (
                         <option key={relacion.id} value={relacion.id}>{relacion.descripcion}</option>
@@ -570,7 +565,6 @@ function GestionarFuncionario() {
                     name="id_sexo_carga"
                     value={formData.id_sexo_carga}
                     onChange={handleChange}
-                    required
                   >
                     {sexos.map((sexo) => (
                       <option key={sexo.id} value={sexo.id}>{sexo.descripcion}</option>
