@@ -91,6 +91,9 @@ const ListarTrabajador = () => {
       <nav className="navbar navbar-light" style={{ backgroundColor: "#4d8fac" }} data-mdb-theme="light">
         <img src="/Images/yuri_logo_sin_fondo.png" alt="Icon" className="Icon" />
         <div className="logOut">
+        <a href="/users">
+            <img src="/Icons/home-3-svgrepo-com (1).svg" alt="Log out" className="Log-Out" />
+          </a>
           <a href="/">
             <img src="/Icons/log-out.svg" alt="Log out" className="Log-Out" />
           </a>
@@ -101,7 +104,7 @@ const ListarTrabajador = () => {
       <div className="BotonesFiltrar">
         <div className="dropdown">
           <select
-            className="btn btn-primary btn-lg"
+            className="btn btn-primary btn-lg btn-dropdown"
             id="sexoDropdown"
             onChange={(e) => setIdSexo(e.target.value)}
             value={idSexo}
@@ -114,7 +117,7 @@ const ListarTrabajador = () => {
           </select>
 
           <select
-            className="btn btn-primary btn-lg"
+            className="btn btn-primary btn-lg btn-dropdown"
             id="cargoDropdown"
             onChange={(e) => setIdCargo(e.target.value)}
             value={idCargo}
@@ -127,7 +130,7 @@ const ListarTrabajador = () => {
           </select>
 
           <select
-            className="btn btn-primary btn-lg"
+            className="btn btn-primary btn-lg btn-dropdown"
             id="areaDropdown"
             onChange={(e) => setIdArea(e.target.value)}
             value={idArea}
@@ -140,11 +143,9 @@ const ListarTrabajador = () => {
           </select>
           <div className="BotonesFuncionarios">
         <button type="button" className="btn btn-primary btn-lg custom-btn export" onClick={handleExport}>
-          Exportar
+          Exportar PDF
         </button>
-        <Link to="/users" className="btn btn-primary btn-lg custom-btn botonVolver">
-          Volver
-        </Link>
+        
       </div>
         </div>
       </div>
