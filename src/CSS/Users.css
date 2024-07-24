@@ -11,7 +11,9 @@ body{
 
 .Icon {
     margin-left: 20px;
-    width: 380px;
+    width: 23rem;
+    margin: 10px;
+   
     
 
    
@@ -97,10 +99,10 @@ h3{
 
 
 .botonUsuario{
-    margin-top: 40px;
-    width: 500px;
-    margin-bottom: 25px;
-    margin-left: 200px;
+    margin-top: 25px;
+    width: 550px;
+    margin-bottom: 20px;
+    margin-left: 320px;
     background-color: #174d60 !important;
 }
 .botonUsuario:hover{
@@ -197,7 +199,7 @@ h3{
 
 .tituloUsers{
   font-size: 45px;
-  margin-left: 355px;
+  margin-left: 455px;
 }
 
 
@@ -236,14 +238,15 @@ h3{
 /* perfil usuario */
 
 .e-card {
-  margin: 100px 100px 50px 20px;
+  margin: 87px 100px 50px 20px;
   background: transparent;
   box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.80);
   position: relative;
-  width: 540px;
-  height: 460px;
+  width: 550px;
+  height: 450px;
   border-radius: 16px;
   overflow: hidden;
+  margin-left: 200px;
 }
 
 .wave {
@@ -255,13 +258,14 @@ h3{
   top: 0;
   margin-left: -50%;
   margin-top: -70%;
-  background: linear-gradient(744deg,#cbce3b,#174d60 60%,#19a3ff);
+  background: linear-gradient(744deg,#b21fdf,#174d60 60%,#19a3ff);
 }
 
 .icon {
   width: 3em;
   margin-top: -1em;
   padding-bottom: 1em;
+  width: 80px;
 }
 
 .infotop {
@@ -351,4 +355,10 @@ h3{
 .user-name, .user-cargo, .user-area {
   display: block;
   margin-bottom: 10px;
+}
+
+
+
+.NombreUsuario{
+ font-size: 28px;
 }

@@ -1,5 +1,6 @@
 body {
     background-color: #E3EDF9 !important;
+    
 }
 
 .navbar {
@@ -51,17 +52,13 @@ body {
     margin-bottom: 1rem;
 }
 
-.p-3 bg-light {
-    background-color: #417ebb !important;
+.p-3.bg-light {
+    background-color: #e6edf5 !important;
 }
-
-
-
 
 .Botones button {
     margin-left: 11px;
 }
-
 
 .custom-btn {
     width: 200px;
@@ -74,27 +71,15 @@ body {
     height: 100%;
 }
 
-
 .FindPerson{
     width: 80%;
-    
 }
 
 h3{
     font-size: 32px !important;
 }
 
-
-.custom-btn {
-    width: 200px;
-    height: 45px;
-    color: white;
-    margin-left: 20px;
-}
-
-
 .botonWrng{
-
     border-color: rgb(59, 59, 59);
     border-radius: 9px;
 }
